@@ -1,7 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 import datetime
-import DataBase.serverConfig
+import DataBase.serverConfig as server_config
 from DataBase.instaUser import InstaUser
 
 # DataBase Constants
@@ -220,7 +220,31 @@ def add_follower(db, user: InstaUser, __id: int):
         return False
 
 
-
+def add_following(db, user: InstaUser, __id: int):
+    if not __create_table_user_folng(db, user):
+        return None
+    stmt = "SELECT {0} FROM {1} WHERE {2} = {3}".format(col_id, table_name, col_id, user.userId)
+    stmt_insert = "INSERT INTO {0} ({1}) VALUES (%S)".format(user.tbl_folng, _col_insta_user_id)
+    args = None
+    try:
+        cursor = db.cursor()
+        cursor.execute(stmt)
+        res = cursor.fetchone()
+        cursor.close()
+        if res is not None:
+            args = __id
+        elif res is None:
+            args = -1
+        try:
+            cursor = db.cursor()
+            cursor.execute(stmt_insert, args)
+            db.commit()
+        except Error:
+            return False
+        return True
+    except Error:
+        raise
+        return False
 
 def main(config):
     db = mysql.connector.Connect(**config)
@@ -240,5 +264,5 @@ def main(config):
 
 
 if __name__ == '__main__':
-    config = serverConfig.server_config
+    config = server_config
     main(config)
