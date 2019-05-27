@@ -17,6 +17,7 @@ col_followers_table = 'followers_table_name'
 col_followings_table = 'followings_table_name'
 col_pageType = 'page_types'
 col_prof_img_url = 'profile_image_url'
+col_bio = 'profile_bio'
 
 
 def __create_table_users(db):
@@ -24,19 +25,19 @@ def __create_table_users(db):
         "CREATE TABLE IF NOT EXISTS {0} ("
         "       {1} INT AUTO_INCREMENT NOT NULL PRIMARY KEY, "
         "       {2} INT NOT NULL DEFAULT '-1', "
-        "       {3} VARCHAR(255) NOT NULL, "
-        "       {4} BOOL, "
+        "       {3} VARCHAR(32) NOT NULL DEFAULT 'N/A', "
+        "       {4} BOOL DEFAULT '0', "
         "       {5} INT NOT NULL DEFAULT '-1', "
         "       {6} INT NOT NULL DEFAULT '-1', "
         "       {7} INT NOT NULL DEFAULT '-1', "
-        "       {8} VARCHAR(64), "
-        "       {9} VARCHAR(64), "
-        "       {10} VARCHAR(255), "
-        "       {11} VARCHAR(255)"
+        "       {8} VARCHAR(64) DEFAULT 'N/A', "
+        "       {9} VARCHAR(64) DEFAULT 'N/A', "
+        "       {10} VARCHAR(255) DEFAULT 'N/A', "
+        "       {11} VARCHAR(255) DEFAULT 'N/A', "
+        "       {12} VARCHAR(255) DEFAULT 'N/A'"
         ")"
     ).format(table_name, col_id, col_app_user_id, col_insta_id, col_isPrivate, col_posts_count, col_followers_count,
-             col_followings_count,
-             col_followers_table, col_followings_table, col_pageType, col_prof_img_url)
+             col_followings_count, col_followers_table, col_followings_table, col_pageType, col_prof_img_url, col_bio)
     try:
         cursor = db.cursor()
         cursor.execute(stmt)
@@ -51,12 +52,14 @@ def insert_user(db, user: InstaUser):
         return False
     args = (
         user.appUserId, user.instaId, user.isPrivate, user.postsCount, user.folrs_count, user.folng_count,
-        user.pageType, user.img_url)
+        user.pageType, user.img_url, user.bio
+    )
     stmt = "INSERT INTO {0} " \
-           "({1},{2},{3},{4},{5},{6},{7})" \
-           " VALUES (%s,%s,%s,%s,%s,%s,%s)".format(table_name, col_app_user_id, col_insta_id, col_isPrivate,
-                                                   col_posts_count,
-                                                   col_followers_count, col_followings_count, col_pageType)
+           "({1},{2},{3},{4},{5},{6},{7},{8},{9})" \
+           " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)".format(table_name, col_app_user_id, col_insta_id, col_isPrivate,
+                                                         col_posts_count,
+                                                         col_followers_count, col_followings_count, col_pageType,
+                                                         col_prof_img_url, col_bio)
     try:
         cursor = db.cursor()
         cursor.execute(stmt, args)
@@ -70,10 +73,14 @@ def insert_user(db, user: InstaUser):
 def update_user(db, user: InstaUser):
     if not __create_table_users(db):
         return False
-    stmt = "UPDATE {0} SET {1} = %s,{2} = %s,{3} = %s,{4} = %s,{5} = %s,{6} = %s" \
-           " WHERE {7} = {8}".format(table_name, col_isPrivate, col_posts_count, col_followers_count,
-                                     col_followings_count, col_pageType, col_insta_id, col_id, user.userId)
-    args = (user.isPrivate, user.postsCount, user.folrs_count, user.folng_count, user.pageType, user.instaId)
+    stmt = "UPDATE {0} SET {1} = %s,{2} = %s,{3} = %s,{4} = %s,{5} = %s,{6} = %s,{7} = %s, {8} = %s" \
+           " WHERE {9} = {10}".format(table_name, col_isPrivate, col_posts_count, col_followers_count,
+                                      col_followings_count, col_pageType, col_insta_id, col_prof_img_url,
+                                      col_bio, col_id, user.userId)
+    args = (
+        user.isPrivate, user.postsCount, user.folrs_count, user.folng_count, user.pageType, user.instaId, user.img_url,
+        user.bio
+    )
     try:
         cursor = db.cursor()
         cursor.execute(stmt, args)
@@ -114,24 +121,22 @@ def get_user(db, _id, select_arg=col_id):
         cursor.execute(stmt)
         res = cursor.fetchone()
 
-        user = InstaUser(res[1], res[2], res[3], res[4], res[5], res[6], res[7])
+        user = InstaUser(res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9])
         user.userId = res[0]
         return user
     except Error:
         return None
 
 
-_col_id = 'instagram_id'
 _col_insta_user_id = 'instaUser_id'
 
 
 def __create_table_user_folrs(db, user: InstaUser):
     stmt = (
         "CREATE TABLE IF NOT EXISTS {0} ("
-        "       {1} VARCHAR(255) NOT NULL PRIMARY KEY, "
-        "       {2} INT NOT NULL DEFAULT '-1'"
+        "       {1} INT NOT NULL DEFAULT '-1'"
         ")"
-    ).format(user.tbl_folrs, _col_id, _col_insta_user_id)
+    ).format(user.tbl_folrs, _col_insta_user_id)
     try:
         db.cursor().execute(stmt)
         return True
@@ -143,10 +148,9 @@ def __create_table_user_folrs(db, user: InstaUser):
 def __create_table_user_folng(db, user: InstaUser):
     stmt = (
         "CREATE TABLE IF NOT EXISTS {0} ("
-        "       {1} VARCHAR(255) NOT NULL PRIMARY KEY, "
-        "       {2} INT NOT NULL DEFAULT '-1'"
+        "       {1} INT NOT NULL DEFAULT '-1'"
         ")"
-    ).format(user.tbl_folrs, _col_id, _col_insta_user_id)
+    ).format(user.tbl_folrs, _col_insta_user_id)
     try:
         db.cursor().execute(stmt)
         return True
@@ -158,13 +162,13 @@ def __create_table_user_folng(db, user: InstaUser):
 def get_followers_list(db, user: InstaUser):
     if not __create_table_user_folrs(db, user):
         return None
-    select_stmt = "SELECT {0} FROM {1}".format(_col_id, user.tbl_folrs)  # get insta id
+    select_stmt = "SELECT {0} FROM {1}".format(_col_insta_user_id, user.tbl_folrs)  # get insta id
     try:
         users = []
         cursor = db.cursor().execute(select_stmt)
         res = cursor.fetchall()
         for tup in res:
-            users.append(get_user(db, tup[0], select_arg=col_insta_id))  # user id
+            users.append(get_user(db, tup[0]))  # insta User id
         return users
     except Error:
         return None
@@ -175,23 +179,25 @@ def get_followers_list(db, user: InstaUser):
 def get_followings_list(db, user: InstaUser):
     if not __create_table_user_folrs(db, user):
         return None
-    select_stmt = "SELECT {0} FROM {1}".format(_col_id, user.tbl_folng)
+    select_stmt = "SELECT {0} FROM {1}".format(_col_insta_user_id, user.tbl_folng)
     try:
         users = []
         cursor = db.cursor().execute(select_stmt)
         res = cursor.fetchall()
         for tup in res:
-            users.append(get_user(db, tup[0], select_arg=col_insta_id))  # user id
+            users.append(get_user(db, tup[0]))  # insta User id
         return users
     except Error:
         return None
+    finally:
+        cursor.close()
 
 
-def add_follower(db, user: InstaUser, instagram_id: str):
+def add_follower(db, user: InstaUser, __id: int):
     if not __create_table_user_folrs(db, user):
         return None
-    stmt = "SELECT {0} FROM {1} WHERE {2} = {3}".format(col_insta_id, table_name, col_insta_id, instagram_id)
-    stmt_insert = "INSERT INTO {0} ({1},{2}) VALUES (%S,%S)".format(user.tbl_folrs, _col_id, _col_insta_user_id)
+    stmt = "SELECT {0} FROM {1} WHERE {2} = {3}".format(col_id, table_name, col_id, user.userId)
+    stmt_insert = "INSERT INTO {0} ({1}) VALUES (%S)".format(user.tbl_folrs, _col_insta_user_id)
     args = None
     try:
         cursor = db.cursor()
@@ -199,9 +205,9 @@ def add_follower(db, user: InstaUser, instagram_id: str):
         res = cursor.fetchone()
         cursor.close()
         if res is not None:
-            args = (instagram_id, user.userId)
+            args = __id
         elif res is None:
-            args = (instagram_id, -1)
+            args = -1
         try:
             cursor = db.cursor()
             cursor.execute(stmt_insert, args)
@@ -212,6 +218,8 @@ def add_follower(db, user: InstaUser, instagram_id: str):
     except Error:
         raise
         return False
+
+
 
 
 def main(config):

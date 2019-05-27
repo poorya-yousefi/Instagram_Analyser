@@ -1,6 +1,6 @@
 class InstaUser:
     def __init__(self, appUserId, instagramId: str, isPrivate: bool, postsCount: int, folrs_count: int,
-                 folng_count: int, pageType: str, prof_img_url: str):
+                 folng_count: int, pageType: str, prof_img_url: str, bio: str):
         self.userId = -1
         self.instaId = instagramId
         self.appUserId = appUserId # who not installed the app returns '-1'
@@ -12,3 +12,4 @@ class InstaUser:
         self.tbl_folng = "_{}_followings_table".format(instagramId)
         self.pageType = pageType
         self.img_url = prof_img_url
+        self.bio = bio
