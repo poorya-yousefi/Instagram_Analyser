@@ -1,8 +1,8 @@
 import mysql.connector
 from mysql.connector import Error
 import datetime
-from appUser import AppUser
-import serverConfig
+from DataBase.appUser import AppUser
+from DataBase.serverConfig import server_config
 
 # DataBase Constants
 table_name = 'Application_Users'
@@ -144,5 +144,5 @@ def main(config):
 
 
 if __name__ == '__main__':
-    config = serverConfig.server_config
+    config = server_config
     main(config)

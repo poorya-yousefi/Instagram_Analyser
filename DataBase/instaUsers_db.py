@@ -1,8 +1,8 @@
 import mysql.connector
 from mysql.connector import Error
 import datetime
-import serverConfig
-from instaUser import InstaUser
+import DataBase.serverConfig
+from DataBase.instaUser import InstaUser
 
 # DataBase Constants
 table_name = 'Instagram_Users'
@@ -16,6 +16,7 @@ col_followings_count = 'followings_count'
 col_followers_table = 'followers_table_name'
 col_followings_table = 'followings_table_name'
 col_pageType = 'page_types'
+col_prof_img_url = 'profile_image_url'
 
 
 def __create_table_users(db):
@@ -24,17 +25,18 @@ def __create_table_users(db):
         "       {1} INT AUTO_INCREMENT NOT NULL PRIMARY KEY, "
         "       {2} INT NOT NULL DEFAULT '-1', "
         "       {3} VARCHAR(255) NOT NULL, "
-        "       {4} BOOL NOT NULL, "
+        "       {4} BOOL, "
         "       {5} INT NOT NULL DEFAULT '-1', "
         "       {6} INT NOT NULL DEFAULT '-1', "
         "       {7} INT NOT NULL DEFAULT '-1', "
         "       {8} VARCHAR(64), "
         "       {9} VARCHAR(64), "
-        "       {10} VARCHAR(255)"
+        "       {10} VARCHAR(255), "
+        "       {11} VARCHAR(255)"
         ")"
     ).format(table_name, col_id, col_app_user_id, col_insta_id, col_isPrivate, col_posts_count, col_followers_count,
              col_followings_count,
-             col_followers_table, col_followings_table, col_pageType)
+             col_followers_table, col_followings_table, col_pageType, col_prof_img_url)
     try:
         cursor = db.cursor()
         cursor.execute(stmt)
@@ -49,7 +51,7 @@ def insert_user(db, user: InstaUser):
         return False
     args = (
         user.appUserId, user.instaId, user.isPrivate, user.postsCount, user.folrs_count, user.folng_count,
-        user.pageType)
+        user.pageType, user.img_url)
     stmt = "INSERT INTO {0} " \
            "({1},{2},{3},{4},{5},{6},{7})" \
            " VALUES (%s,%s,%s,%s,%s,%s,%s)".format(table_name, col_app_user_id, col_insta_id, col_isPrivate,
@@ -103,7 +105,6 @@ def get_all_users(db: mysql.connector, order_by=col_id, sort_arg='ASC'):
         return None
     finally:
         cursor.close()
-        db.close()
 
 
 def get_user(db, _id, select_arg=col_id):
@@ -120,15 +121,17 @@ def get_user(db, _id, select_arg=col_id):
         return None
 
 
-_col_id = 'instaUser_id'
+_col_id = 'instagram_id'
+_col_insta_user_id = 'instaUser_id'
 
 
 def __create_table_user_folrs(db, user: InstaUser):
     stmt = (
         "CREATE TABLE IF NOT EXISTS {0} ("
-        "       {1} VARCHAR(255) NOT NULL PRIMARY KEY"
+        "       {1} VARCHAR(255) NOT NULL PRIMARY KEY, "
+        "       {2} INT NOT NULL DEFAULT '-1'"
         ")"
-    ).format(user.tbl_folrs, _col_id)
+    ).format(user.tbl_folrs, _col_id, _col_insta_user_id)
     try:
         db.cursor().execute(stmt)
         return True
@@ -140,9 +143,10 @@ def __create_table_user_folrs(db, user: InstaUser):
 def __create_table_user_folng(db, user: InstaUser):
     stmt = (
         "CREATE TABLE IF NOT EXISTS {0} ("
-        "       {1} VARCHAR(255) NOT NULL PRIMARY KEY"
+        "       {1} VARCHAR(255) NOT NULL PRIMARY KEY, "
+        "       {2} INT NOT NULL DEFAULT '-1'"
         ")"
-    ).format(user.tbl_folng, _col_id)
+    ).format(user.tbl_folrs, _col_id, _col_insta_user_id)
     try:
         db.cursor().execute(stmt)
         return True
@@ -154,19 +158,18 @@ def __create_table_user_folng(db, user: InstaUser):
 def get_followers_list(db, user: InstaUser):
     if not __create_table_user_folrs(db, user):
         return None
-    select_stmt = "SELECT {0} FROM {1}".format(_col_id, user.tbl_folrs)
+    select_stmt = "SELECT {0} FROM {1}".format(_col_id, user.tbl_folrs)  # get insta id
     try:
         users = []
         cursor = db.cursor().execute(select_stmt)
         res = cursor.fetchall()
         for tup in res:
-            users.append(get_user(db, tup[0]))  # user id
+            users.append(get_user(db, tup[0], select_arg=col_insta_id))  # user id
         return users
     except Error:
         return None
     finally:
         cursor.close()
-        db.close()
 
 
 def get_followings_list(db, user: InstaUser):
@@ -178,23 +181,44 @@ def get_followings_list(db, user: InstaUser):
         cursor = db.cursor().execute(select_stmt)
         res = cursor.fetchall()
         for tup in res:
-            users.append(get_user(db, tup[0]))  # user id
+            users.append(get_user(db, tup[0], select_arg=col_insta_id))  # user id
         return users
     except Error:
         return None
-    finally:
+
+
+def add_follower(db, user: InstaUser, instagram_id: str):
+    if not __create_table_user_folrs(db, user):
+        return None
+    stmt = "SELECT {0} FROM {1} WHERE {2} = {3}".format(col_insta_id, table_name, col_insta_id, instagram_id)
+    stmt_insert = "INSERT INTO {0} ({1},{2}) VALUES (%S,%S)".format(user.tbl_folrs, _col_id, _col_insta_user_id)
+    args = None
+    try:
+        cursor = db.cursor()
+        cursor.execute(stmt)
+        res = cursor.fetchone()
         cursor.close()
-        db.close()
-
-
-def add_follower(db, user: InstaUser, insta_id):
+        if res is not None:
+            args = (instagram_id, user.userId)
+        elif res is None:
+            args = (instagram_id, -1)
+        try:
+            cursor = db.cursor()
+            cursor.execute(stmt_insert, args)
+            db.commit()
+        except Error:
+            return False
+        return True
+    except Error:
+        raise
+        return False
 
 
 def main(config):
     db = mysql.connector.Connect(**config)
     # ******************************* TEST
     # date = datetime.datetime.now()
-    user = InstaUser(1, True, 14, 200, 250, "", "", "normal")
+    user = InstaUser(1, True, 14, 200, 250, "normal")
     # user.userId = 2
     # user.signupDate = date
     # update_user(db, user)

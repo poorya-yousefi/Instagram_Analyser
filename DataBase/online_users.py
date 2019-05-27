@@ -1,6 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
-import appUsers_db
+import DataBase.appUsers_db as appUsers_db
 
 table_name = "online_users"
 col_id = "id"

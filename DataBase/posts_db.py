@@ -1,8 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 import datetime
-import serverConfig
-from post import Post
+from DataBase.post import Post
 
 # DataBase Constants
 table_name = 'All_Posts'
