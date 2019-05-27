@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js not-logged-in client-root">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>
+Hedi (@hedi2165) • Instagram photos and videos
+</title>
+
+        
+        <meta name="robots" content="noimageindex, noarchive">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="theme-color" content="#000000">
+        <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
+        <link rel="manifest" href="/data/manifest.json">
+
+        <link rel="preload" href="/static/bundles/metro/Vendor.js/2da21567db01.js" as="script" type="text/javascript" crossorigin="anonymous" />
+<link rel="preload" href="/static/bundles/metro/en_US.js/4212f76e42e4.js" as="script" type="text/javascript" crossorigin="anonymous" />
+<link rel="preload" href="/static/bundles/metro/ConsumerLibCommons.js/1d6d774e335a.js" as="script" type="text/javascript" crossorigin="anonymous" />
+<link rel="preload" href="/static/bundles/metro/ConsumerUICommons.js/1a43ba7f5110.js" as="script" type="text/javascript" crossorigin="anonymous" />
+<link rel="preload" href="/static/bundles/metro/ConsumerAsyncCommons.js/6bc4edf28135.js" as="script" type="text/javascript" crossorigin="anonymous" />
+<link rel="preload" href="/static/bundles/metro/Consumer.js/3017c7fc78d6.js" as="script" type="text/javascript" crossorigin="anonymous" />
+<link rel="preload" href="/static/bundles/metro/ProfilePageContainer.js/6a0282ea761f.js" as="script" type="text/javascript" crossorigin="anonymous" />
+        
+        
+
+        <script type="text/javascript">
+        (function() {
+  var docElement = document.documentElement;
+  var classRE = new RegExp('(^|\\s)no-js(\\s|$)');
+  var className = docElement.className;
+  docElement.className = className.replace(classRE, '$1js$2');
+})();
+</script>
+        <script type="text/javascript">
+(function() {
+  if ('PerformanceObserver' in window && 'PerformancePaintTiming' in window) {
+    window.__bufferedPerformance = [];
+    var ob = new PerformanceObserver(function(e) {
+      window.__bufferedPerformance.push.apply(window.__bufferedPerformance,e.getEntries());
+    });
+    ob.observe({entryTypes:['paint']});
+  }
+
+  window.__bufferedErrors = [];
+  window.onerror = function(message, url, line, column, error) {
+    window.__bufferedErrors.push({
+      message: message,
+      url: url,
+      line: line,
+      column: column,
+      error: error
+    });
+    return false;
+  };
+  window.__initialData = {
+    pending: true,
+    waiting: []
+  };
+  function asyncFetchSharedData(extra) {
+    var sharedDataReq = new XMLHttpRequest();
+    sharedDataReq.onreadystatechange = function() {
+          if (sharedDataReq.readyState === 4) {
+            if(sharedDataReq.status === 200){
+              var sharedData = JSON.parse(sharedDataReq.responseText);
+              window.__initialDataLoaded(sharedData, extra);
+            }
+          }
+        }
+    sharedDataReq.open('GET', '/data/shared_data/', true);
+    sharedDataReq.send(null);
+  }
+  window.__initialDataLoadFromCache = function(sharedData) {
+    var extra = { entry_data: sharedData.entry_data };
+    try {
+      var cachedSharedData = localStorage.getItem("ig_sdc");
+      if (!cachedSharedData) {
+        throw new Error();
+      }
+      cachedSharedData = JSON.parse(cachedSharedData);
+      if (cachedSharedData.expiry < Date.now() || cachedSharedData.schemaVersion != sharedData.cache_schema_version) {
+        throw new Error();
+      }
+    } catch (ex) {
+      return asyncFetchSharedData(extra);
+    }
+    window.__initialDataLoaded(sharedData, cachedSharedData.data);
+  };
+
+  function notifyLoaded(item, data) {
+    item.pending = false;
+    item.data = data;
+    for (var i = 0;i < item.waiting.length; ++i) {
+      item.waiting[i].resolve(item.data);
+    }
+    item.waiting = [];
+  }
+  function notifyError(item, msg) {
+    item.pending = false;
+    item.error = new Error(msg);
+    for (var i = 0;i < item.waiting.length; ++i) {
+      item.waiting[i].reject(item.error);
+    }
+    item.waiting = [];
+  }
+  window.__initialDataLoaded = function(initialData, extraData) {
+    if (extraData) {
+      for (var key in extraData) {
+        initialData[key] = extraData[key];
+      }
+    }
+    notifyLoaded(window.__initialData, initialData);
+  };
+  window.__initialDataError = function(msg) {
+    notifyError(window.__initialData, msg);
+  };
+  window.__additionalData = {};
+  window.__pendingAdditionalData = function(paths) {
+    for (var i = 0;i < paths.length; ++i) {
+      window.__additionalData[paths[i]] = {
+        pending: true,
+        waiting: []
+      };
+    }
+  };
+  window.__additionalDataLoaded = function(path, data) {
+    if (path in window.__additionalData) {
+      notifyLoaded(window.__additionalData[path], data);
+    } else {
+      console.error('Unexpected additional data loaded "' + path + '"');
+    }
+  };
+  window.__additionalDataError = function(path, msg) {
+    if (path in window.__additionalData) {
+      notifyError(window.__additionalData[path], msg);
+    } else {
+      console.error('Unexpected additional data encountered an error "' + path + '": ' + msg);
+    }
+  };
+  
+})();
+</script><script type="text/javascript">
+
+/*
+ Copyright 2018 Google Inc. All Rights Reserved.
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/
+
+(function(){function g(a,c){b||(b=a,f=c,h.forEach(function(a){removeEventListener(a,l,e)}),m())}function m(){b&&f&&0<d.length&&(d.forEach(function(a){a(b,f)}),d=[])}function n(a,c){function k(){g(a,c);d()}function b(){d()}function d(){removeEventListener("pointerup",k,e);removeEventListener("pointercancel",b,e)}addEventListener("pointerup",k,e);addEventListener("pointercancel",b,e)}function l(a){if(a.cancelable){var c=performance.now(),b=a.timeStamp;b>c&&(c=+new Date);c-=b;"pointerdown"==a.type?n(c,
+a):g(c,a)}}var e={passive:!0,capture:!0},h=["click","mousedown","keydown","touchstart","pointerdown"],b,f,d=[];h.forEach(function(a){addEventListener(a,l,e)});window.perfMetrics=window.perfMetrics||{};window.perfMetrics.onFirstInputDelay=function(a){d.push(a);m()}})();
+</script>
+    
+                <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/static/images/ico/apple-touch-icon-76x76-precomposed.png/4272e394f5ad.png">
+                <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/ico/apple-touch-icon-120x120-precomposed.png/02ba5abf9861.png">
+                <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/images/ico/apple-touch-icon-152x152-precomposed.png/419a6f9c7454.png">
+                <link rel="apple-touch-icon-precomposed" sizes="167x167" href="/static/images/ico/apple-touch-icon-167x167-precomposed.png/a24e58112f06.png">
+                <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/static/images/ico/apple-touch-icon-180x180-precomposed.png/85a358fb3b7d.png">
+                
+                    <link rel="icon" sizes="192x192" href="/static/images/ico/favicon-192.png/68d99ba29cc8.png">
+                
+            
+            
+                    <link rel="mask-icon" href="/static/images/ico/favicon.svg/fc72dd4bfde8.svg" color="#262626">
+                  
+                  <link rel="shortcut icon" type="image/x-icon" href="/static/images/ico/favicon.ico/36b3ee2d91ed.ico">
+                
+            
+            
+            
+    
+        
+            <link rel="alternate" href="android-app://com.instagram.android/https/instagram.com/_u/hedi2165/" />
+        
+        
+            <meta property="al:ios:app_name" content="Instagram" />
+            <meta property="al:ios:app_store_id" content="389801252" />
+            <meta property="al:ios:url" content="instagram://user?username=hedi2165" />
+            <meta property="al:android:app_name" content="Instagram" />
+            <meta property="al:android:package" content="com.instagram.android" />
+            <meta property="al:android:url" content="https://www.instagram.com/_u/hedi2165/" />
+        
+        <link rel="canonical" href="https://www.instagram.com/hedi2165/" />
+        <meta content="197 Followers, 248 Following, 15 Posts - See Instagram photos and videos from Hedi (@hedi2165)" name="description" />
+        
+            <meta property="og:type" content="profile" />
+            <meta property="og:image" content="https://instagram.fevn1-1.fna.fbcdn.net/vp/2f157692be40178caccc27c3e68d559e/5D98B91B/t51.2885-19/s150x150/60204287_2287967751428042_7851177165998522368_n.jpg?_nc_ht=instagram.fevn1-1.fna.fbcdn.net" />
+            <meta property="og:title" content="Hedi (@hedi2165) • Instagram photos and videos" />
+            <meta property="og:description" content="197 Followers, 248 Following, 15 Posts - See Instagram photos and videos from Hedi (@hedi2165)" />
+            <meta property="og:url" content="https://www.instagram.com/hedi2165/" />
+        
+    
+
+            <script type="application/ld+json">
+                {"@context":"http:\/\/schema.org","@type":"Person","name":"Hedi","alternateName":"@hedi2165","description":"&#x27;Master of Water Resources Engineering&#x27;\nSardasht\u2764","mainEntityofPage":{"@type":"ProfilePage","@id":"https:\/\/www.instagram.com\/hedi2165\/","interactionStatistic":{"@type":"InteractionCounter","interactionType":"http:\/\/schema.org\/FollowAction","userInteractionCount":"197"}},"image":"https:\/\/www.instagram.com\/static\/images\/ico\/favicon-200.png\/ab6eff595bb1.png"}
+            </script>
+        
+    <link rel="alternate" href="https://www.instagram.com/hedi2165/" hreflang="x-default" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=en" hreflang="en" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=fr" hreflang="fr" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=it" hreflang="it" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=de" hreflang="de" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es" hreflang="es" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=zh-cn" hreflang="zh-cn" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=zh-tw" hreflang="zh-tw" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=ja" hreflang="ja" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=ko" hreflang="ko" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=pt" hreflang="pt" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=pt-br" hreflang="pt-br" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=af" hreflang="af" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=cs" hreflang="cs" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=da" hreflang="da" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=el" hreflang="el" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=fi" hreflang="fi" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=hr" hreflang="hr" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=hu" hreflang="hu" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=id" hreflang="id" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=ms" hreflang="ms" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=nb" hreflang="nb" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=nl" hreflang="nl" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=pl" hreflang="pl" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=ru" hreflang="ru" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=sk" hreflang="sk" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=sv" hreflang="sv" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=th" hreflang="th" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=tl" hreflang="tl" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=tr" hreflang="tr" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=hi" hreflang="hi" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=bn" hreflang="bn" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=gu" hreflang="gu" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=kn" hreflang="kn" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=ml" hreflang="ml" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=mr" hreflang="mr" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=pa" hreflang="pa" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=ta" hreflang="ta" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=te" hreflang="te" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=ne" hreflang="ne" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=si" hreflang="si" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=ur" hreflang="ur" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=vi" hreflang="vi" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=bg" hreflang="bg" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=fr-ca" hreflang="fr-ca" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=ro" hreflang="ro" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=sr" hreflang="sr" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=uk" hreflang="uk" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=zh-hk" hreflang="zh-hk" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-cl" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-ec" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-hn" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-bo" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-pa" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-pe" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-cu" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-mx" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-co" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-do" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-pr" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-py" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-ar" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-uy" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-ve" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-gt" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-ni" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-sv" />
+<link rel="alternate" href="https://www.instagram.com/hedi2165/?hl=es-la" hreflang="es-cr" />
+</head>
+    <body class="">
+        
+    <span id="react-root"><svg width="50" height="50" viewBox="0 0 50 50" style="position:absolute;top:50%;left:50%;margin:-25px 0 0 -25px;fill:#c7c7c7"><path d="M25 1c-6.52 0-7.34.03-9.9.14-2.55.12-4.3.53-5.82 1.12a11.76 11.76 0 0 0-4.25 2.77 11.76 11.76 0 0 0-2.77 4.25c-.6 1.52-1 3.27-1.12 5.82C1.03 17.66 1 18.48 1 25c0 6.5.03 7.33.14 9.88.12 2.56.53 4.3 1.12 5.83a11.76 11.76 0 0 0 2.77 4.25 11.76 11.76 0 0 0 4.25 2.77c1.52.59 3.27 1 5.82 1.11 2.56.12 3.38.14 9.9.14 6.5 0 7.33-.02 9.88-.14 2.56-.12 4.3-.52 5.83-1.11a11.76 11.76 0 0 0 4.25-2.77 11.76 11.76 0 0 0 2.77-4.25c.59-1.53 1-3.27 1.11-5.83.12-2.55.14-3.37.14-9.89 0-6.51-.02-7.33-.14-9.89-.12-2.55-.52-4.3-1.11-5.82a11.76 11.76 0 0 0-2.77-4.25 11.76 11.76 0 0 0-4.25-2.77c-1.53-.6-3.27-1-5.83-1.12A170.2 170.2 0 0 0 25 1zm0 4.32c6.4 0 7.16.03 9.69.14 2.34.11 3.6.5 4.45.83 1.12.43 1.92.95 2.76 1.8a7.43 7.43 0 0 1 1.8 2.75c.32.85.72 2.12.82 4.46.12 2.53.14 3.29.14 9.7 0 6.4-.02 7.16-.14 9.69-.1 2.34-.5 3.6-.82 4.45a7.43 7.43 0 0 1-1.8 2.76 7.43 7.43 0 0 1-2.76 1.8c-.84.32-2.11.72-4.45.82-2.53.12-3.3.14-9.7.14-6.4 0-7.16-.02-9.7-.14-2.33-.1-3.6-.5-4.45-.82a7.43 7.43 0 0 1-2.76-1.8 7.43 7.43 0 0 1-1.8-2.76c-.32-.84-.71-2.11-.82-4.45a166.5 166.5 0 0 1-.14-9.7c0-6.4.03-7.16.14-9.7.11-2.33.5-3.6.83-4.45a7.43 7.43 0 0 1 1.8-2.76 7.43 7.43 0 0 1 2.75-1.8c.85-.32 2.12-.71 4.46-.82 2.53-.11 3.29-.14 9.7-.14zm0 7.35a12.32 12.32 0 1 0 0 24.64 12.32 12.32 0 0 0 0-24.64zM25 33a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm15.68-20.8a2.88 2.88 0 1 0-5.76 0 2.88 2.88 0 0 0 5.76 0z"/></svg></span>
+
+        
+
+
+        
+            <script type="text/javascript">window._sharedData = {"config":{"csrf_token":"KJulvrVxJHZReJlUZVKra7VrtFq0AUeO","viewer":null,"viewerId":null},"country_code":"IR","language_code":"en","locale":"en_US","entry_data":{"ProfilePage":[{"logging_page_id":"profilePage_4540036849","show_suggested_profiles":false,"graphql":{"user":{"biography":"'Master of Water Resources Engineering'\nSardasht\u2764","blocked_by_viewer":false,"country_block":false,"external_url":null,"external_url_linkshimmed":null,"edge_followed_by":{"count":197},"followed_by_viewer":false,"edge_follow":{"count":248},"follows_viewer":false,"full_name":"Hedi","has_channel":false,"has_blocked_viewer":false,"highlight_reel_count":0,"has_requested_viewer":false,"id":"4540036849","is_business_account":false,"is_joined_recently":false,"business_category_name":null,"is_private":true,"is_verified":false,"edge_mutual_followed_by":{"count":0,"edges":[]},"profile_pic_url":"https://instagram.fevn1-1.fna.fbcdn.net/vp/2f157692be40178caccc27c3e68d559e/5D98B91B/t51.2885-19/s150x150/60204287_2287967751428042_7851177165998522368_n.jpg?_nc_ht=instagram.fevn1-1.fna.fbcdn.net","profile_pic_url_hd":"https://instagram.fevn1-1.fna.fbcdn.net/vp/ceb61cb6d42fd0870f7e0602d0c2c236/5D630A63/t51.2885-19/s320x320/60204287_2287967751428042_7851177165998522368_n.jpg?_nc_ht=instagram.fevn1-1.fna.fbcdn.net","requested_by_viewer":false,"username":"hedi2165","connected_fb_page":null,"edge_felix_video_timeline":{"count":0,"page_info":{"has_next_page":false,"end_cursor":null},"edges":[]},"edge_owner_to_timeline_media":{"count":15,"page_info":{"has_next_page":false,"end_cursor":null},"edges":[]},"edge_saved_media":{"count":0,"page_info":{"has_next_page":false,"end_cursor":null},"edges":[]},"edge_media_collections":{"count":0,"page_info":{"has_next_page":false,"end_cursor":null},"edges":[]}}},"show_follow_dialog":false,"toast_content_on_load":null}]},"hostname":"www.instagram.com","deployment_stage":"c2","platform":"web","nonce":"RU2yBY4wELx3BsqiYEXHJQ==","mid_pct":26.30361,"zero_data":{},"cache_schema_version":3,"server_checks":{},"knobs":{"acct:ntb":0,"cb":0,"captcha":0,"fr":0},"to_cache":{"gatekeepers":{"3":false,"4":true,"5":false,"6":false,"7":false,"8":false,"9":false,"10":false,"11":false,"12":false,"13":true,"14":true,"15":true,"16":true,"18":true,"19":false,"20":false,"21":false,"23":false,"24":false,"25":true,"26":true,"27":false,"28":false,"29":true,"30":true,"31":false,"32":true,"33":false},"qe":{"sdc":{"g":"","p":{}},"app_upsell":{"g":"","p":{}},"igl_app_upsell":{"g":"","p":{}},"notif":{"g":"","p":{}},"p_edit":{"g":"","p":{}},"comment_ta":{"g":"","p":{}},"log_cont":{"g":"","p":{}},"onetaplogin":{"g":"","p":{}},"onetap":{"g":"","p":{}},"multireg_iter":{"g":"","p":{}},"felix":{"g":"","p":{}},"felix_clear_fb_cookie":{"g":"","p":{}},"felix_creation_duration_limits":{"g":"","p":{}},"felix_creation_fb_crossposting":{"g":"","p":{}},"felix_creation_fb_crossposting_v2":{"g":"","p":{}},"felix_creation_validation":{"g":"","p":{}},"mweb_topical_explore":{"g":"","p":{}},"post_options":{"g":"","p":{}},"igtv_public_viewing":{"g":"","p":{}},"nux":{"g":"","p":{}},"igwsvl":{"g":"","p":{}},"iglscioi":{"g":"","p":{}},"wpn":{"g":"","p":{}},"wss2":{"g":"","p":{}},"sticker_tray":{"g":"","p":{}},"web_sentry":{"g":"","p":{}},"0":{"p":{"3":true,"4":true,"5":true,"6":false},"qex":true},"2":{"p":{"0":true},"qex":true},"4":{"p":{"0":true},"qex":true},"5":{"p":{"0":false},"qex":true},"6":{"p":{"1":true,"2":false,"3":false,"4":false,"5":false,"6":false,"7":false,"8":false},"qex":true},"7":{"p":{"0":false},"qex":true},"8":{"p":{"0":false,"1":false,"2":false,"3":false,"4":false},"qex":true},"9":{"p":{"0":true,"1":true,"2":2000,"3":100,"4":25,"5":false},"qex":true},"10":{"p":{"0":false,"2":false,"3":true,"4":false},"qex":true},"11":{"p":{"0":true},"qex":true},"12":{"p":{"0":5},"qex":true},"13":{"p":{"0":true},"qex":true},"14":{"p":{"0":true},"qex":true},"16":{"p":{"0":false},"qex":true},"17":{"p":{"1":true},"qex":true},"18":{"p":{"0":true,"1":true},"qex":true},"19":{"p":{"0":true},"qex":true},"21":{"p":{"0":true,"1":true},"qex":true},"22":{"p":{"0":false,"1":false,"2":8.0,"3":0.85,"4":0.95,"5":10.0,"6":false,"7":false,"8":false,"9":false},"qex":true},"23":{"p":{"0":false,"1":false},"qex":true},"24":{"p":{"0":true},"qex":true},"25":{"p":{},"qex":true},"26":{"p":{"0":""},"qex":true},"27":{"p":{"0":false},"qex":true},"28":{"p":{"0":false},"qex":true}},"probably_has_app":false,"cb":false},"rollout_hash":"f4c28142cf13","bundle_variant":"metro","is_canary":false};</script>
+<script type="text/javascript">window.__initialDataLoaded(window._sharedData);</script>
+<script type="text/javascript">var __BUNDLE_START_TIME__=this.nativePerformanceNow?nativePerformanceNow():Date.now(),__DEV__=false,process=this.process||{};process.env=process.env||{};process.env.NODE_ENV=process.env.NODE_ENV||"production";!(function(r){"use strict";function e(){return c=Object.create(null)}function t(r){var e=r,t=c[e];return t&&t.isInitialized?t.publicModule.exports:o(e,t)}function n(r){var e=r;if(c[e]&&c[e].importedDefault!==f)return c[e].importedDefault;var n=t(e),i=n&&n.__esModule?n.default:n;return c[e].importedDefault=i}function i(r){var e=r;if(c[e]&&c[e].importedAll!==f)return c[e].importedAll;var n,i=t(e);if(i&&i.__esModule)n=i;else{if(n={},i)for(var o in i)p.call(i,o)&&(n[o]=i[o]);n.default=i}return c[e].importedAll=n}function o(e,t){if(!s&&r.ErrorUtils){s=!0;var n;try{n=u(e,t)}catch(e){r.ErrorUtils.reportFatalError(e)}return s=!1,n}return u(e,t)}function l(r){return{segmentId:r>>>v,localId:r&h}}function u(e,o){if(!o&&g.length>0){var u=l(e),f=u.segmentId,p=u.localId,s=g[f];null!=s&&(s(p),o=c[e])}var v=r.nativeRequire;if(!o&&v){var h=l(e),I=h.segmentId;v(h.localId,I),o=c[e]}if(!o)throw a(e);if(o.hasError)throw d(e,o.error);o.isInitialized=!0;var _=o,w=_.factory,y=_.dependencyMap;try{var M=o.publicModule;if(M.id=e,m.length>0)for(var b=0;b<m.length;++b)m[b].cb(e,M);return w(r,t,n,i,M,M.exports,y),o.factory=void 0,o.dependencyMap=void 0,M.exports}catch(r){throw o.hasError=!0,o.error=r,o.isInitialized=!1,o.publicModule.exports=void 0,r}}function a(r){var e='Requiring unknown module "'+r+'".';return Error(e)}function d(r,e){var t=r;return Error('Requiring module "'+t+'", which threw an exception: '+e)}r.__r=t,r.__d=function(r,e,t){null==c[e]&&(c[e]={dependencyMap:t,factory:r,hasError:!1,importedAll:f,importedDefault:f,isInitialized:!1,publicModule:{exports:{}}})},r.__c=e,r.__registerSegment=function(r,e){g[r]=e};var c=e(),f={},p={}.hasOwnProperty;t.importDefault=n,t.importAll=i;var s=!1,v=16,h=65535;t.unpackModuleId=l,t.packModuleId=function(r){return(r.segmentId<<v)+r.localId};var m=[];t.registerHook=function(r){var e={cb:r};return m.push(e),{release:function(){for(var r=0;r<m.length;++r)if(m[r]===e){m.splice(r,1);break}}}};var g=[]})('undefined'!=typeof global?global:'undefined'!=typeof window?window:this);
+__s={"js":{"50":"/static/bundles/metro/AllTranslationMappings_af_ZA.js/dcb558f4cf99.js","52":"/static/bundles/metro/AllTranslationMappings_cs_CZ.js/7b439adddfc9.js","54":"/static/bundles/metro/AllTranslationMappings_da_DK.js/6e4574d8365c.js","56":"/static/bundles/metro/AllTranslationMappings_de_DE.js/5f4e69bdb443.js","58":"/static/bundles/metro/AllTranslationMappings_el_GR.js/288f516feb77.js","60":"/static/bundles/metro/AllTranslationMappings_en_US.js/163eb77fae18.js","62":"/static/bundles/metro/AllTranslationMappings_es_ES.js/e9cb2a1f40ec.js","64":"/static/bundles/metro/AllTranslationMappings_es_LA.js/ca65de24bb43.js","66":"/static/bundles/metro/AllTranslationMappings_fi_FI.js/b3659b68646a.js","68":"/static/bundles/metro/AllTranslationMappings_fr_FR.js/a74be8caa7e3.js","70":"/static/bundles/metro/AllTranslationMappings_id_ID.js/4b354ffddcad.js","72":"/static/bundles/metro/AllTranslationMappings_it_IT.js/6ff94855b711.js","74":"/static/bundles/metro/AllTranslationMappings_ja_JP.js/aafbf644b800.js","76":"/static/bundles/metro/AllTranslationMappings_ko_KR.js/a74eb48cbf2b.js","78":"/static/bundles/metro/AllTranslationMappings_ms_MY.js/745a47f57389.js","80":"/static/bundles/metro/AllTranslationMappings_nb_NO.js/68b0f86e921e.js","82":"/static/bundles/metro/AllTranslationMappings_nl_NL.js/2749076c68bb.js","84":"/static/bundles/metro/AllTranslationMappings_pl_PL.js/c8e632e970f5.js","86":"/static/bundles/metro/AllTranslationMappings_pt_BR.js/6563195b676d.js","88":"/static/bundles/metro/AllTranslationMappings_pt_PT.js/5c1cc966dddd.js","90":"/static/bundles/metro/AllTranslationMappings_ru_RU.js/514fc4277e8f.js","92":"/static/bundles/metro/AllTranslationMappings_sv_SE.js/1e95ecb18dda.js","94":"/static/bundles/metro/AllTranslationMappings_th_TH.js/28e9de179643.js","96":"/static/bundles/metro/AllTranslationMappings_tl_PH.js/28e5971b9db0.js","98":"/static/bundles/metro/AllTranslationMappings_tr_TR.js/c89ce8f249e4.js","100":"/static/bundles/metro/AllTranslationMappings_zh_CN.js/0170ea559ee3.js","102":"/static/bundles/metro/AllTranslationMappings_zh_TW.js/9b84805bac7e.js","104":"/static/bundles/metro/AllTranslationMappings_bn_IN.js/beb0f244b150.js","106":"/static/bundles/metro/AllTranslationMappings_gu_IN.js/b66f23753239.js","108":"/static/bundles/metro/AllTranslationMappings_hi_IN.js/d9f2b0aa1672.js","110":"/static/bundles/metro/AllTranslationMappings_hr_HR.js/1d830d63256a.js","112":"/static/bundles/metro/AllTranslationMappings_hu_HU.js/eefd821523c0.js","114":"/static/bundles/metro/AllTranslationMappings_kn_IN.js/db2871040493.js","116":"/static/bundles/metro/AllTranslationMappings_ml_IN.js/b875a331f70d.js","118":"/static/bundles/metro/AllTranslationMappings_mr_IN.js/6602a9db45d6.js","120":"/static/bundles/metro/AllTranslationMappings_ne_NP.js/1111a2ce48fe.js","122":"/static/bundles/metro/AllTranslationMappings_pa_IN.js/f461e3ce802d.js","124":"/static/bundles/metro/AllTranslationMappings_si_LK.js/9075e99a408d.js","126":"/static/bundles/metro/AllTranslationMappings_sk_SK.js/709086dd58c1.js","128":"/static/bundles/metro/AllTranslationMappings_ta_IN.js/2952587a8f37.js","130":"/static/bundles/metro/AllTranslationMappings_te_IN.js/cdfa77650302.js","132":"/static/bundles/metro/AllTranslationMappings_vi_VN.js/58cdac2d6e18.js","134":"/static/bundles/metro/AllTranslationMappings_zh_HK.js/03cbe92a5571.js","136":"/static/bundles/metro/AllTranslationMappings_bg_BG.js/63648122db7b.js","138":"/static/bundles/metro/AllTranslationMappings_fr_CA.js/069ad9f673f4.js","140":"/static/bundles/metro/AllTranslationMappings_ro_RO.js/1e4e58c9032a.js","142":"/static/bundles/metro/AllTranslationMappings_sr_RS.js/553cb38de0fd.js","144":"/static/bundles/metro/AllTranslationMappings_uk_UA.js/4e13b2e30959.js","146":"/static/bundles/metro/MobileStoriesLoginPage.js/15e3e636b11c.js","147":"/static/bundles/metro/DesktopStoriesLoginPage.js/2180f318f86d.js","148":"/static/bundles/metro/shaka-player.ui.js/a381531e321c.js","149":"/static/bundles/metro/DirectNewThread.js/3cafc286adca.js","150":"/static/bundles/metro/DirectMQTT.js/efe37894fcdd.js","151":"/static/bundles/metro/MobileStoriesPage.js/3a2da596cd00.js","152":"/static/bundles/metro/DesktopStoriesPage.js/e6334d5436c4.js","153":"/static/bundles/metro/ActivityFeedBox.js/6dd0dbc40b5e.js","154":"/static/bundles/metro/ActivityFeedPage.js/00b55ce42f67.js","155":"/static/bundles/metro/AdsSettingsPage.js/bef331f79521.js","156":"/static/bundles/metro/DonateCheckoutPage.js/24d0485e4f0d.js","157":"/static/bundles/metro/CameraPage.js/fc3a8e0d8c17.js","158":"/static/bundles/metro/SettingsModules.js/3eca0434ce3c.js","159":"/static/bundles/metro/ContactHistoryPage.js/bda0395979d7.js","160":"/static/bundles/metro/AccessToolPage.js/ae5ddfe2c2be.js","161":"/static/bundles/metro/AccessToolViewAllPage.js/fef2ad90cd9b.js","162":"/static/bundles/metro/AccountPrivacyBugPage.js/60e8a56f30ee.js","163":"/static/bundles/metro/FirstPartyPlaintextPasswordLandingPage.js/c9ff88a85c01.js","164":"/static/bundles/metro/ThirdPartyPlaintextPasswordLandingPage.js/fefeed17f235.js","165":"/static/bundles/metro/PlaintextPasswordBugPage.js/d9c237551fb4.js","166":"/static/bundles/metro/PrivateAccountMadePublicBugPage.js/4b0b2fa0af72.js","167":"/static/bundles/metro/PublicAccountNotMadePrivateBugPage.js/fde3ca738b04.js","168":"/static/bundles/metro/BlockedAccountsBugPage.js/1dc8b3505868.js","169":"/static/bundles/metro/AndroidBetaPrivacyBugPage.js/bfa2f46ea69e.js","170":"/static/bundles/metro/DataControlsSupportPage.js/1208c7306af0.js","171":"/static/bundles/metro/DataDownloadRequestPage.js/060a8a591b31.js","172":"/static/bundles/metro/DataDownloadRequestConfirmPage.js/8e88be5a4cb1.js","173":"/static/bundles/metro/CheckpointUnderageAppealPage.js/ba44e23fdeb2.js","174":"/static/bundles/metro/AccountRecoveryLandingPage.js/14500119602e.js","175":"/static/bundles/metro/ContactInvitesOptOutPage.js/c953cb63622c.js","176":"/static/bundles/metro/ParentalConsentPage.js/fee53114be1c.js","177":"/static/bundles/metro/ParentalConsentNotParentPage.js/6169e7f40b56.js","178":"/static/bundles/metro/TermsAcceptPage.js/d82653d70580.js","179":"/static/bundles/metro/TermsUnblockPage.js/cd20984ec055.js","180":"/static/bundles/metro/NewTermsConfirmPage.js/c29ab36e19e3.js","181":"/static/bundles/metro/ContactInvitesOptOutStatusPage.js/03c77f990c90.js","182":"/static/bundles/metro/CreationModules.js/8b5288a963f5.js","183":"/static/bundles/metro/StoryCreationPage.js/e3ff77e6559f.js","184":"/static/bundles/metro/ExploreMediaPageContainer.js/d93be5747149.js","185":"/static/bundles/metro/LikedByListContainer.js/a42998cf76a8.js","186":"/static/bundles/metro/CommentLikedByListContainer.js/ac203e003847.js","187":"/static/bundles/metro/DiscoverMediaPageContainer.js/720ce1f5105e.js","188":"/static/bundles/metro/DiscoverPeoplePageContainer.js/fde0e4488903.js","189":"/static/bundles/metro/EmailConfirmationPage.js/01940d80cf66.js","190":"/static/bundles/metro/FBSignupPage.js/aff89bfbfcdd.js","191":"/static/bundles/metro/NewUserInterstitial.js/a36502ca6435.js","192":"/static/bundles/metro/MultiStepSignupPage.js/6cebf710fa86.js","193":"/static/bundles/metro/FeedSidebarContainer.js/54d99fb7aeb2.js","194":"/static/bundles/metro/FeedPageContainer.js/79b5253dbb5d.js","195":"/static/bundles/metro/FollowListModal.js/2365a3edc6cb.js","196":"/static/bundles/metro/FollowListPage.js/87a2e73d5c3c.js","197":"/static/bundles/metro/SimilarAccountsModal.js/d5e8065040e2.js","198":"/static/bundles/metro/SimilarAccountsPage.js/b821b81d930b.js","199":"/static/bundles/metro/LandingPage.js/5412a320226e.js","200":"/static/bundles/metro/LocationsDirectoryCountryPage.js/a8bd2a6d8fd6.js","201":"/static/bundles/metro/LocationsDirectoryCityPage.js/c9904c4918df.js","202":"/static/bundles/metro/LocationPageContainer.js/2652b38b9bca.js","203":"/static/bundles/metro/LocationsDirectoryLandingPage.js/dff36ee7c872.js","204":"/static/bundles/metro/LoginAndSignupPage.js/7099d63f53ab.js","205":"/static/bundles/metro/ResetPasswordPageContainer.js/6ad7e3e95cf0.js","206":"/static/bundles/metro/MobileAllCommentsPage.js/9c62a8b91ebd.js","207":"/static/bundles/metro/MediaChainingPageContainer.js/ec0dcc6fd363.js","208":"/static/bundles/metro/PostPageContainer.js/06ac822c5d6d.js","209":"/static/bundles/metro/ProfilesDirectoryLandingPage.js/cb74a47f2f35.js","210":"/static/bundles/metro/HashtagsDirectoryLandingPage.js/f316c676cff2.js","211":"/static/bundles/metro/SuggestedDirectoryLandingPage.js/1c324494c58c.js","212":"/static/bundles/metro/TagPageContainer.js/83c71cd7c31d.js","213":"/static/bundles/metro/PhoneConfirmPage.js/fce2dfaab60d.js","214":"/static/bundles/metro/ProfilePageContainer.js/6a0282ea761f.js","215":"/static/bundles/metro/HttpErrorPage.js/5c7380ab5300.js","216":"/static/bundles/metro/IGTVVideoDraftsPageContainer.js/241057159561.js","217":"/static/bundles/metro/IGTVVideoUploadPageContainer.js/3063674c7c2e.js","218":"/static/bundles/metro/OAuthPermissionsPage.js/7070e8779c94.js","219":"/static/bundles/metro/MobileDirectPage.js/df56b9fdd5c6.js","220":"/static/bundles/metro/OneTapUpsell.js/2854b4a910ed.js","221":"/static/bundles/metro/NametagLandingPage.js/b0d0d0af43ec.js","222":"/static/bundles/metro/DebugInfoNub.js/50ae6e0bc5a3.js","224":"/static/bundles/metro/Consumer.js/3017c7fc78d6.js","225":"/static/bundles/metro/Challenge.js/d129f628b1df.js","226":"/static/bundles/metro/NotificationLandingPage.js/9197b52a094d.js","240":"/static/bundles/metro/EmbedAsyncLogger.js/4a5e4fc53bbc.js","242":"/static/bundles/metro/EmbedRich.js/d8f97070c6e4.js"},"css":{"242":"/static/bundles/metro/EmbedRich.css/fb41e2fd6e58.css"}}</script>
+<script type="text/javascript" src="/static/bundles/metro/Polyfills.js/896c14e1dd87.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/static/bundles/metro/Vendor.js/2da21567db01.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/static/bundles/metro/en_US.js/4212f76e42e4.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/static/bundles/metro/ConsumerLibCommons.js/1d6d774e335a.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/static/bundles/metro/ConsumerUICommons.js/1a43ba7f5110.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/static/bundles/metro/ConsumerAsyncCommons.js/6bc4edf28135.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/static/bundles/metro/Consumer.js/3017c7fc78d6.js" crossorigin="anonymous" charset="utf-8" async=""></script>
+<script type="text/javascript" src="/static/bundles/metro/ProfilePageContainer.js/6a0282ea761f.js" crossorigin="anonymous" charset="utf-8" async=""></script>
+
+            
+        
+
+        <script type="text/javascript">
+(function(){
+  function normalizeError(err) {
+    var errorInfo = err.error || {};
+    var getConfigProp = function(propName, defaultValueIfNotTruthy) {
+      var propValue = window._sharedData && window._sharedData[propName];
+      return propValue ? propValue : defaultValueIfNotTruthy;
+    };
+    return {
+      line: err.line || errorInfo.message || 0,
+      column: err.column || 0,
+      name: 'InitError',
+      message: err.message || errorInfo.message || '',
+      script: errorInfo.script || '',
+      stack: errorInfo.stackTrace || errorInfo.stack || '',
+      timestamp: Date.now(),
+      ref: window.location.href,
+      deployment_stage: getConfigProp('deployment_stage', ''),
+      is_canary: getConfigProp('is_canary', false),
+      rollout_hash: getConfigProp('rollout_hash', ''),
+      is_prerelease: window.__PRERELEASE__ || false,
+      bundle_variant: getConfigProp('bundle_variant', null),
+      request_url: err.url || window.location.href,
+      response_status_code: errorInfo.statusCode || 0
+    }
+  }
+  window.addEventListener('load', function(){
+    if (window.__bufferedErrors && window.__bufferedErrors.length) {
+      if (window.caches && window.caches.keys && window.caches.delete) {
+        window.caches.keys().then(function(keys) {
+          keys.forEach(function(key) {
+            window.caches.delete(key)
+          })
+        })
+      }
+      window.__bufferedErrors.map(function(error) {
+        return normalizeError(error)
+      }).forEach(function(normalizedError) {
+        var request = new XMLHttpRequest();
+        request.open('POST', '/client_error/', true);
+        request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+        request.send(JSON.stringify(normalizedError));
+      })
+    }
+  })
+}());
+</script>
+    </body>
+</html>
