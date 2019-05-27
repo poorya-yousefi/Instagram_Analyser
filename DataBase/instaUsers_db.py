@@ -160,8 +160,8 @@ def __create_table_user_folrs(db, user: InstaUser):
 def __create_table_user_folng(db, user: InstaUser):
     stmt = (
         "CREATE TABLE IF NOT EXISTS {0} ("
-        "       {1} INT NOT NULL DEFAULT '-1',"
-        "       {2} INT NOT NULL DEFAULT '0',"
+        "       {1} INT NOT NULL DEFAULT '-1', "
+        "       {2} INT NOT NULL DEFAULT '0', "  # states : 0,1,2,3,4
         "       {3} timestamp DEFAULT CURRENT_TIMESTAMP"
         ")"
     ).format(user.tbl_folrs, _col_insta_user_id, _col_follow_state, _col_change_date)
@@ -207,10 +207,10 @@ def get_followings_list(db, user: InstaUser):
         cursor.close()
 
 
-def add_follower(db, user: InstaUser, __id: int):
+def add_follower(db, user: InstaUser, __id, col=col_insta_id):
     if not __create_table_user_folrs(db, user):
         return None
-    stmt = "SELECT {0} FROM {1} WHERE {2} = {3}".format(col_id, table_name, col_id, user.userId)
+    stmt = "SELECT {0} FROM {1} WHERE {2} = {3}".format(col_id, table_name, col, __id)
     stmt_insert = "INSERT INTO {0} ({1}) VALUES (%S)".format(user.tbl_folrs, _col_insta_user_id)
     args = None
     try:
@@ -219,9 +219,9 @@ def add_follower(db, user: InstaUser, __id: int):
         res = cursor.fetchone()
         cursor.close()
         if res is not None:
-            args = __id
+            args.append(res[0])
         elif res is None:
-            args = -1
+            args.append(-1)
         try:
             cursor = db.cursor()
             cursor.execute(stmt_insert, args)
@@ -234,21 +234,21 @@ def add_follower(db, user: InstaUser, __id: int):
         return False
 
 
-def add_following(db, user: InstaUser, __id: int):
+def add_following(db, user: InstaUser, __id, col=col_insta_id):
     if not __create_table_user_folng(db, user):
         return None
-    stmt = "SELECT {0} FROM {1} WHERE {2} = {3}".format(col_id, table_name, col_id, user.userId)
+    stmt = "SELECT {0} FROM {1} WHERE {2} = {3}".format(col_id, table_name, col, __id)
     stmt_insert = "INSERT INTO {0} ({1}) VALUES (%S)".format(user.tbl_folng, _col_insta_user_id)
-    args = [-1]
+    args = []
     try:
         cursor = db.cursor()
         cursor.execute(stmt)
         res = cursor.fetchone()
         cursor.close()
-        # if res is not None:
-        #     args = __id
-        # elif res is None:
-        #     args = -1
+        if res is not None:
+            args.append(res[0])
+        elif res is None:
+            args.append(-1)
         try:
             cursor = db.cursor()
             cursor.execute(stmt_insert, args)
@@ -258,7 +258,31 @@ def add_following(db, user: InstaUser, __id: int):
         return True
     except Error:
         raise
-        return False
+
+
+def update_following(db, user: InstaUser, state: int, __id, col=col_insta_id):
+    stmt = "SELECT {0} FROM {1} WHERE {2} = {3}".format(col_id, table_name, col, __id)
+
+    args = (state, datetime.datetime.now())
+    try:
+        cursor = db.cursor()
+        cursor.execute(stmt)
+        res = cursor.fetchone()
+        stmt_update = "UPDATE {0} SET {1} = %s,{2} = %s" \
+                      " WHERE {3} = {4}".format(user.tbl_folng, _col_follow_state, _col_change_date,
+                                                _col_insta_user_id, res[0])
+        cursor.close()
+        try:
+            cursor = db.cursor()
+            cursor.execute(stmt_update, args)
+            db.commit()
+        except Error:
+            return False
+        return True
+    except Error:
+        raise
+    finally:
+        cursor.close()
 
 
 def main(config):
