@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
-from Server.Selenium import Login
+from Server.Selenium import Login, Relations
 
 app = Flask(__name__)
 
@@ -59,7 +59,6 @@ def login_handler():
             return result["result"]
 
     else:
-        print(notJson)
         return notJson
 
 
@@ -93,11 +92,13 @@ def get_followers_list_handler():
         print("Get followers json contents is : ", content)
 
         # getting the Login objects
-        user = dic["user"]
+        # user = dic["user"]
 
         # saving objects to
-        followers = user.get_followers_list(content['username'], "followers")
-        return followers
+        # followers = user.get_followers_list(content['username'], "followers")
+        # return followers
+        Relations.get_relations("iBotErfan")
+
 
     else:
         print(notJson)
