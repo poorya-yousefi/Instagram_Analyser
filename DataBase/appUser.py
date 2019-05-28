@@ -16,7 +16,7 @@ class AppUser:
         self.cookie_path = cookie_path
 
     def __str__(self):  # TODO
-        return "<Id: {0} | lastLogin: {1}>".format(self.userId, self.lastLoginDate)
+        return "<Id: {0} | lastLogin: {1} | >".format(self.userId, self.lastLoginDate)
 
 
 class CommercialUser(AppUser):
