@@ -1,6 +1,6 @@
 class Post:
     def __init__(self, insta_id: int, post_url: str, p_type: str, media_url: str, like_count: int, comm_count: int,
-                 capt: str, likers_tbl: str, comntrs_tbl: str, isSaved: bool, tagged_tbl: str, keyWords: str):
+                 capt: str, likers_tbl: str, comntrs_tbl: str, is_saved: bool, tagged_tbl: str, key_words: str):
         self.postId = -1
         self.insta_id = insta_id
         self.post_url = post_url
@@ -11,9 +11,9 @@ class Post:
         self.capt = capt
         self.likers_tbl = likers_tbl
         self.comntrs_tbl = comntrs_tbl
-        self.isSaved = isSaved
+        self.isSaved = is_saved
         self.tagged_tbl = tagged_tbl
-        self.keyWords = keyWords
+        self.keyWords = key_words
 
     def __str__(self):
         pass
