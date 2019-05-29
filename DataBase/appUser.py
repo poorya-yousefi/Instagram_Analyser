@@ -16,8 +16,11 @@ class AppUser:
         self.cookie_path = cookie_path
         self.js_path = js_path
 
-    def __str__(self):  # TODO
-        return "<Id: {0} | lastLogin: {1} | >".format(self.userId, self.lastLoginDate)
+    def __str__(self):
+        return "<Id: {0} | signupDate: {1} | lastLoginDate: {2} | hasTwoStep: {3} | country: {4} | city: {5} | " \
+               "phoneNum: {6} | personalityKeyWords: {7} | cookie_path: {8} | js_path: {9}>".format \
+            (self.userId, self.signupDate, self.lastLoginDate, self.hasTwoStep, self.country, self.city, self.phoneNum,
+             self.personalityKeyWords, self.cookie_path, self.js_path)
 
 
 class CommercialUser(AppUser):

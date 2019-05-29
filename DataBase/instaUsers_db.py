@@ -287,7 +287,7 @@ def main(config):
     db = mysql.connector.Connect(**config)
     # ******************************* TEST
     # date = datetime.datetime.now()
-    user = InstaUser(1, True, 14, 200, 250, "normal")
+    # user = InstaUser(1, True, 14, 200, 250, "normal")
     # user.userId = 2
     # user.signupDate = date
     # update_user(db, user)
@@ -295,9 +295,7 @@ def main(config):
     # insert_user(db, user)
     users = get_all_users(db)
     for u in users:
-        print(u.userId, u.appUserId)
-        # print(u)
-    # ******************************* TEST
+        print(str(u))
 
 
 if __name__ == '__main__':
