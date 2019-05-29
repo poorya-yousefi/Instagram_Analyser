@@ -3,8 +3,8 @@ class InstaUser:
                  folrs_count: int,
                  folng_count: int, page_type: str, prof_img_url: str, bio: str):
         self.userId = -1
-        self.tbl_folrs = "_{0}_{1}_followers_table".format(instagram_id, unique_id)
-        self.tbl_folng = "_{0}_{1}_followings_table".format(instagram_id, unique_id)
+        self.tbl_folrs = "_{0}_{1}_followers_tbl".format(instagram_id, unique_id)
+        self.tbl_folng = "_{0}_{1}_followings_tbl".format(instagram_id, unique_id)
 
         self.instaId = instagram_id
         self.uniqueId = unique_id

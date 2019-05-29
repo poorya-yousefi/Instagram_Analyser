@@ -3,6 +3,7 @@ from mysql.connector import Error
 import datetime
 from DataBase.appUser import *
 from DataBase.serverConfig import server_config
+import json as js
 
 # DataBase Constants
 table_name = 'Application_Users'
@@ -17,6 +18,7 @@ col_personalityKeyWords = 'personalityKeyWords'
 col_cookie = 'cookie_file_path'
 col_company_name = 'company_name'
 col_activity = 'activity'
+col_info = 'json_path'
 
 
 def create_table_users(db):
@@ -29,13 +31,14 @@ def create_table_users(db):
         "       {5} VARCHAR(255), "
         "       {6} VARCHAR(255), "
         "       {7} VARCHAR(20), "
-        "       {8} VARCHAR(255),"
-        "       {9} VARCHAR(255),"
-        "       {10} VARCHAR(255),"
-        "       {11} VARCHAR(255)"
+        "       {8} VARCHAR(255), "
+        "       {9} VARCHAR(255), "
+        "       {10} VARCHAR(255), "
+        "       {11} VARCHAR(255), "
+        "       {12} VARCHAR(255)"
         ")"
     ).format(table_name, col_id, col_signupDate, col_lastLoginDate, col_hasTwoStep, col_country,
-             col_city, col_phoneNum, col_personalityKeyWords, col_cookie, col_company_name, col_activity)
+             col_city, col_phoneNum, col_personalityKeyWords, col_cookie, col_company_name, col_activity, col_info)
     try:
         cursor = db.cursor()
         cursor.execute(stmt_create)
@@ -50,15 +53,16 @@ def insert_user(db, user):
         return False
     if user is CommercialUser:
         args = (user.lastLoginDate, user.hasTwoStep, user.country, user.city, user.phoneNum,
-                user.personalityKeyWords, user.cookie_path, user.companyName, user.activity)
+                user.personalityKeyWords, user.cookie_path, user.js_path, user.companyName, user.activity)
     else:
-        args = args = (user.lastLoginDate, user.hasTwoStep, user.country, user.city, user.phoneNum,
-                user.personalityKeyWords, user.cookie_path, None, None)
+        args = (user.lastLoginDate, user.hasTwoStep, user.country, user.city, user.phoneNum,
+                user.personalityKeyWords, user.cookie_path, user.js_path, None, None)
     stmt = "INSERT INTO {0} " \
-           "({1},{2},{3},{4},{5},{6},{7},{8},{9})" \
-           " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)".format(table_name, col_lastLoginDate, col_hasTwoStep,
-                                                         col_country, col_city, col_phoneNum, col_personalityKeyWords,
-                                                         col_cookie, col_company_name, col_activity)
+           "({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})" \
+           " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)".format(table_name, col_lastLoginDate, col_hasTwoStep,
+                                                            col_country, col_city, col_phoneNum,
+                                                            col_personalityKeyWords,
+                                                            col_cookie, col_info, col_company_name, col_activity)
     try:
         cursor = db.cursor()
         cursor.execute(stmt, args)
@@ -67,31 +71,23 @@ def insert_user(db, user):
     except Error:
         raise
         return False
-    # finally:
-    #     cursor.close()
-    #     db.close()
 
 
 def update_user(db, user: AppUser):
     if not create_table_users(db):
         return False
+    stmt = "UPDATE {0} SET {1} = %s,{2} = %s,{3} = %s,{4} = %s,{5} = %s," \
+           "{6} = %s , {7} = %s , {8} = %s" \
+           " WHERE {9} = {10}".format(table_name, col_lastLoginDate, col_hasTwoStep, col_country,
+                                      col_city, col_phoneNum, col_personalityKeyWords, col_company_name,
+                                      col_activity,
+                                      col_id, user.userId)
     if user is CommercialUser:
-        stmt = "UPDATE {0} SET {1} = %s,{2} = %s,{3} = %s,{4} = %s,{5} = %s," \
-               "{6} = %s , {7} = %s , {8} = %s" \
-               " WHERE {9} = {10}".format(table_name, col_lastLoginDate, col_hasTwoStep, col_country,
-                                          col_city, col_phoneNum, col_personalityKeyWords, col_company_name,
-                                          col_activity,
-                                          col_id, user.userId)
         args = (user.lastLoginDate, user.hasTwoStep, user.country, user.city, user.phoneNum,
                 user.personalityKeyWords, user.companyName, user.activity)
     else:
-        stmt = "UPDATE {0} SET {1} = %s,{2} = %s,{3} = %s,{4} = %s,{5} = %s," \
-               "{6} = %s " \
-               " WHERE {7} = {8}".format(table_name, col_lastLoginDate, col_hasTwoStep, col_country,
-                                         col_city, col_phoneNum, col_personalityKeyWords,
-                                         col_id, user.userId)
         args = (user.lastLoginDate, user.hasTwoStep, user.country, user.city, user.phoneNum,
-                user.personalityKeyWords)
+                user.personalityKeyWords, None, None)
 
     try:
         cursor = db.cursor()
@@ -124,7 +120,6 @@ def get_all_users(db: mysql.connector, order_by=col_id, sort_arg='ASC'):
         return None
     finally:
         cursor.close()
-        db.close()
 
 
 def get_user(db, user_id, select_arg=col_id):
@@ -136,7 +131,7 @@ def get_user(db, user_id, select_arg=col_id):
         # if res is None:
         #     return None
         user = AppUser(res[2], res[3], res[4], res[5],
-                       res[6], res[7], res[8])
+                       res[6], res[7], res[8], res[11])
         user.userId = res[0]
         user.signupDate = res[1]
         if res[9] is not None:
@@ -164,7 +159,7 @@ def main(config):
     # insert_user(db, u)
     users = get_all_users(db)
     for u in users:
-        print(u)
+        print(str(u))
     # ******************************* TEST
 
 

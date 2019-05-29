@@ -20,6 +20,15 @@ col_pageType = 'page_types'
 col_prof_img_url = 'profile_image_url'
 col_bio = 'profile_bio'
 
+_col_insta_user_id = 'instaUser_id'
+_col_follow_state = 'following_state'
+# state types :
+# 0 : undefined
+# 1 : requested
+# 2 : accepted
+# 3 : declined
+# 4 : un_followed!!!
+_col_change_date = 'date'
 
 def __create_table_users(db):
     stmt = (
@@ -130,17 +139,6 @@ def get_user(db, _id, select_arg=col_id):
         return user
     except Error:
         return None
-
-
-_col_insta_user_id = 'instaUser_id'
-_col_follow_state = 'following_state'
-# state types :
-# 0 : undefined
-# 1 : requested
-# 2 : accepted
-# 3 : declined
-# 4 : un_followed!!!
-_col_change_date = 'date'
 
 
 def __create_table_user_folrs(db, user: InstaUser):
