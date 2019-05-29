@@ -79,11 +79,6 @@ def two_step_handler():
         return notJson
 
 
-# @app.route("/get_follower", ["POST"])
-# def get_followers_handler():
-#     print()
-
-
 @app.route("/getFollowers", methods=['POST'])
 def get_followers_list_handler():
     if request.is_json:
@@ -97,31 +92,30 @@ def get_followers_list_handler():
         # saving objects to
         # followers = user.get_followers_list(content['username'], "followers")
         # return followers
-        Relations.get_relations("iBotErfan")
+        followings = Relations.get_relations(content["username"], "followers")
 
+        return jsonify(followings)
 
     else:
         print(notJson)
         return notJson
 
 
-@app.route("/getFollowing", methods=['POST'])
+@app.route("/getFollowing", methods=['POST', 'GET'])
 def get_following_list_handler():
     if request.is_json:
         print("Get following json is received")
         content = request.get_json()
         print("Get following json contents is : ", content)
 
-        # getting the Login objects
-        user = dic["user"]
-
-        # saving objects to
-        following = user.get_followers_list(content['username'], "following")
-        return following
+        following = Relations.get_relations(content['username'], "followings")
+        print("Following done")
+        return "done"
 
     else:
         print(notJson)
         return notJson
+
 
 if __name__ == "__main__":
     app.run()
