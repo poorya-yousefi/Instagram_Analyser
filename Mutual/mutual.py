@@ -1,24 +1,27 @@
 # successful login
-successLogin = "000"
+success_login = "000"
 
 # incorrect password
-incorrectPass = "001"
+incorrect_pass = "001"
 
 # two step code is enable
-twoStepEn = "002"
+two_step_en = "002"
 
 # incorrect two step code
-twoStepCodeIncorrect = "003"
+two_step_code_incorrect = "003"
 
 # Commercial
-commercialUser = "004"
+commercial_user = "004"
 
 # App user for topic
-usualUser = "005"
+usual_user = "005"
 
 # user already exists error
-existingUser = "006"
+existing_user = "006"
+
+# successful process
+success_process = "111"
 
 # unknown error
-unknownError = "999"
+unknown_error = "999"
 
