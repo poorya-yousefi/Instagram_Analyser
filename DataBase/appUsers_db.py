@@ -24,7 +24,7 @@ col_info = 'json_path'
 def create_table_users(db):
     stmt_create = (
         "CREATE TABLE IF NOT EXISTS {0} ("
-        "       {1} INT AUTO_INCREMENT NOT NULL PRIMARY KEY, "
+        "       {1} INT NOT NULL PRIMARY KEY, "
         "       {2} timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, "
         "       {3} timestamp NOT NULL, "
         "       {4} BOOL NOT NULL DEFAULT '0', "
@@ -52,17 +52,17 @@ def insert_user(db, user):
     if not create_table_users(db):
         return False
     if user is CommercialUser:
-        args = (user.lastLoginDate, user.hasTwoStep, user.country, user.city, user.phoneNum,
+        args = (user.userId, user.lastLoginDate, user.hasTwoStep, user.country, user.city, user.phoneNum,
                 user.personalityKeyWords, user.cookie_path, user.js_path, user.companyName, user.activity)
     else:
-        args = (user.lastLoginDate, user.hasTwoStep, user.country, user.city, user.phoneNum,
+        args = (user.userId, user.lastLoginDate, user.hasTwoStep, user.country, user.city, user.phoneNum,
                 user.personalityKeyWords, user.cookie_path, user.js_path, None, None)
     stmt = "INSERT INTO {0} " \
-           "({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})" \
-           " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)".format(table_name, col_lastLoginDate, col_hasTwoStep,
-                                                            col_country, col_city, col_phoneNum,
-                                                            col_personalityKeyWords,
-                                                            col_cookie, col_info, col_company_name, col_activity)
+           "({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})" \
+           " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)".format(table_name, col_id, col_lastLoginDate, col_hasTwoStep,
+                                                               col_country, col_city, col_phoneNum,
+                                                               col_personalityKeyWords,
+                                                               col_cookie, col_info, col_company_name, col_activity)
     try:
         cursor = db.cursor()
         cursor.execute(stmt, args)
@@ -130,9 +130,8 @@ def get_user(db, user_id, select_arg=col_id):
         res = cursor.fetchone()
         # if res is None:
         #     return None
-        user = AppUser(res[2], res[3], res[4], res[5],
+        user = AppUser(res[0], res[2], res[3], res[4], res[5],
                        res[6], res[7], res[8], res[11])
-        user.userId = res[0]
         user.signupDate = res[1]
         if res[9] is not None:
             user.companyName = res[9]
