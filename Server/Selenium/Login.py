@@ -2,7 +2,9 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 from selenium.common.exceptions import NoSuchElementException
-
+from Mutual import mutual
+import requests
+import re
 
 class Login:
 
@@ -13,11 +15,6 @@ class Login:
         self.password = password
         self.code = None
 
-        # Return values
-        self.incorrectPass = "Incorrect Password"
-        self.successLogin = "login Successfully"
-        self.incorrectCode = "Incorrect verification code"
-
         self.sleep = 4
 
         firefox_profile = webdriver.FirefoxProfile()
@@ -27,8 +24,7 @@ class Login:
             executable_path=r'C:\Users\erfan\.wdm\geckodriver\v0.24.0\win64\geckodriver.exe',
             firefox_profile=firefox_profile)
         self.letter = {
-            "driver": self.driver,
-            "result": None
+           "response": ""
         }
 
     # closing a browser after finishing
@@ -52,7 +48,7 @@ class Login:
         while True:
             try:
                 self.driver.find_element_by_xpath("//p[@id='slfErrorAlert']")
-                self.letter["result"] = self.incorrectPass
+                self.letter["response"] = mutual.incorrectPass
                 self.driver.close()
                 return self.letter
             except NoSuchElementException:
@@ -61,7 +57,7 @@ class Login:
         while True:
             try:
                 self.driver.find_element_by_xpath("//input[@name='verificationCode']")
-                self.letter["result"] = "two step is enable"
+                self.letter["response"] = mutual.twoStepEn
                 self.driver.close()
                 return self.letter
 
@@ -71,26 +67,26 @@ class Login:
         # saving the cookies for this user
         save_cookies(self.userName, self.driver.get_cookies())
         self.driver.close()
-        self.letter["result"] = self.successLogin
+        self.letter["response"] = mutual.successLogin
         return self.letter
 
     # two step verification code for login to instagram
     def two_step(self, code):
-        passsword_vry = self.driver.find_element_by_xpath("//input[@name='verificationCode']")
-        passsword_vry.clear()
-        passsword_vry.send_keys(code)
-        passsword_vry.send_keys(Keys.RETURN)
+        password_vry = self.driver.find_element_by_xpath("//input[@name='verificationCode']")
+        password_vry.clear()
+        password_vry.send_keys(code)
+        password_vry.send_keys(Keys.RETURN)
         time.sleep(self.sleep)
         while True:
             try:
                 self.driver.find_element_by_xpath("//p[@id='twoFactorErrorAlert']")
-                self.letter["result"] = self.incorrectCode
+                self.letter["response"] = mutual.incorrectPass
                 return self.letter
             except NoSuchElementException:
                 print("such kind of elements didn't find")
                 break
-
-        return self.successLogin
+        self.letter["response"]= mutual.successLogin
+        return self.letter
 
 
 # A function to save cookies
@@ -99,3 +95,16 @@ def save_cookies(username, cookies):
         file = open("../../inf/cookies/" + username + ".data", "w+")
         for cookie in cookies:
             file.write(str(cookie) + '\n')
+
+
+# A function to get unique id information fast to sign up
+def get_fast_id(username):
+    url = "https://www.instagram.com/" + username + "/"
+    infos = requests.get(url).text
+    id_index = re.search('\"id\":', infos)
+    return infos[id_index.end()+1:id_index.end() + 11]
+
+
+
+
+

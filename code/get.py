@@ -97,14 +97,14 @@ class InstagramBot:
             s.location_once_scrolled_into_view
             time.sleep(sleep)
             nim = 0
-            SCROLL_PAUSE_TIME = 0.5
+            SCROLL_PAUSE_TIME = 2
             # Get scroll height
             last_height = driver.execute_script("return arguments[0].scrollTop = arguments[0].scrollHeight", dialog)
             # userslist = []
             cc = 0
             userslistget = driver.find_elements_by_xpath("//div[@class='d7ByH']/a")
 
-            while cc <= 4:
+            while cc<=4:
                 if len(userslistget) <= allfoll - 3:
                     while True:
                         # Scroll down to bottom
@@ -330,6 +330,6 @@ class InstagramBot:
 
 hemin = InstagramBot()
 hemin.login()
-# hemin.get_followers_list("guilan.fanni")
+hemin.get_followers_list("guilan.fanni")
 # hemin.find_network("guilan.humanitiesclean")
-hemin.get_liker("hemin.saed")
+# hemin.get_liker("hemin.saed")
