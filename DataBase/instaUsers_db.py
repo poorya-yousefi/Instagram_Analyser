@@ -38,7 +38,7 @@ def __create_table_users(db):
         "       {1} INT AUTO_INCREMENT NOT NULL PRIMARY KEY, "
         "       {2} INT NOT NULL DEFAULT '-1', "
         "       {3} VARCHAR(32) NOT NULL DEFAULT 'N/A', "
-        "       {4} VARCHAR(10) NOT NULL DEFAULT '0000000000'"  # main unique id
+        "       {4} VARCHAR(10) NOT NULL DEFAULT '0000000000',"  # main unique id
         "       {5} BOOL DEFAULT '0', "
         "       {6} INT NOT NULL DEFAULT '-1', "
         "       {7} INT NOT NULL DEFAULT '-1', "
@@ -288,7 +288,7 @@ def update_following(db, user: InstaUser, state: int, __id, col=col_insta_id):
 
 
 def main(config):
-    db = mysql.connector.Connect(**config)
+    db = mysql.connector.connect(**config)
     # ******************************* TEST
     # date = datetime.datetime.now()
     # user = InstaUser(1, True, 14, 200, 250, "normal")
