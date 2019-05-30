@@ -113,7 +113,9 @@ def get_public_informations(username):
         "folwerNum": -1,
         "folwngNum": -1,
         "bio": "",
-        "img_url": ""
+        "img_url": "",
+        "is_private": None,
+        "name": ""
     }
 
     info = get_req_url(username)
@@ -128,13 +130,22 @@ def get_public_informations(username):
     informations["folwngNum"] = infArr[1]
     informations["postNum"] = infArr[2]
     informations["img_url"] = find_img_url(info)
+    informations["is_private"] = get_is_private(info)
+    informations["name"] = get_name_user(info)
+    return informations
+
+
+# getting full name of the user to show
+def get_name_user(info):
+    start_index = re.search("\"full_name\":", info).end()
+    last_index = re.search("\"has_channel\":", info).start()
+    return info[start_index + 1:last_index - 2]
 
 
 # finding image url for
 def find_img_url(info):
     start_index = re.search("\"profile_pic_url_hd\":", info).end()
     last_index = re.search("\"requested_by_viewer\"", info).start()
-    print(info[start_index+1: last_index - 2])
     return info[start_index: last_index - 1]
 
 
@@ -177,3 +188,8 @@ def get_req_url(username):
     return requests.get(url).text
 
 
+# check that the user is private or not
+def get_is_private(info):
+    bio_start_index = re.search("\"is_private\":", info).end()
+    bio_end_index = re.search("\"is_verified\":", info).start()
+    return info[bio_start_index: bio_end_index - 1]

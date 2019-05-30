@@ -2,7 +2,7 @@ import datetime
 
 
 class AppUser:
-    def __init__(self, unique_id: int, last_login_date: datetime, has_two_step: bool,
+    def __init__(self, unique_id: str, last_login_date: datetime, has_two_step: bool,
                  country: str, city: str, phone_num: str,
                  personality_key_words: str, cookie_path: str, js_path: str):
         self.userId = unique_id
@@ -24,7 +24,7 @@ class AppUser:
 
 
 class CommercialUser(AppUser):
-    def __init__(self, unique_id: int, last_login_date: datetime, has_two_step: bool,
+    def __init__(self, unique_id: str, last_login_date: datetime, has_two_step: bool,
                  country: str, city: str, phone_num: str,
                  personality_key_words: str, cookie_path: str, js_path: str, company_name: str, activity: str):
         AppUser.__init__(self, unique_id, last_login_date, has_two_step, country, city, phone_num,
