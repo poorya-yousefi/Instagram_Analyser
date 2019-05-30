@@ -4,8 +4,13 @@ from flask import jsonify
 from Server.Selenium import Login, Relations
 from DataBase import appUser, appUsers_db
 from DataBase import instaUser, instaUsers_db
+from DataBase import serverConfig
 from Mutual import mutual
 import datetime
+import mysql.connector
+
+# defining data base
+db = None
 
 app = Flask(__name__)
 
@@ -13,14 +18,14 @@ dic = {
     "user": None
 }
 
-# Common Errors
-notJson = "Login Failed, The received file is not json."
-
 
 @app.route("/sign_up", methods=["POST"])
-def sign_up():
+def sign_up_handler():
     if not request.is_json:
-        return jsonify({'error': 'not json'})
+        letter = {
+            "response": mutual.unknownError
+        }
+        return jsonify(letter)
     else:
         # getting the json file from client
         content = request.get_json()
@@ -30,25 +35,56 @@ def sign_up():
 
         # check that can we log as a username or not
         result = user.login()
+
+        uniqueID = Login.get_fast_id(content["username"])
+
+        if instaUsers_db.get_user(db, uniqueID, instaUsers_db.col_unique_id) is not None:
+            if appUsers_db.get_user(db, uniqueID, select_arg="unique_id") is not None:
+                result["response"] = mutual.existingUser
+                return result["response"]
+            # if we have an instaUser just make an app user
+            else:
+                # userInformation = Login.get_public_informations(content["username"])
+                newAppUser = appUser.CommercialUser(uniqueID, datetime.datetime.now(), False, content["country"],
+                                                    content["city"],
+                                                    content["phone_num"], content["personality_key_words"], "", "",
+                                                    content["company_name"], content["activity"])
+                appUsers_db.insert_user(db, newAppUser)
+                editedInstaUser = instaUsers_db.get_user(db, uniqueID, select_arg=uniqueID)
+                editedInstaUser.appUserId = appUsers_db.get_user()
+
+                return result
+
         if result["response"] == "000":
             print("A success login for " + content["username"])
 
-            # check for that which this user exists or not
-
             if content["topic"] == mutual.commercialUser:
+                userInformation = Login.get_public_informations(content["username"])
+                newInstaUser = instaUser.InstaUser(-1, content["username"], uniqueID, userInformation["is_private"],
+                                                   userInformation["postNum"], userInformation["folwerNum"],
+                                                   userInformation["folwngNum"], content["page_type"],
+                                                   userInformation["img_url"], userInformation["bio"])
+
+                instaUsers_db.insert_user(db, newInstaUser)
+
                 newAppUser = appUser.CommercialUser(datetime.datetime.now(), False, content["country"], content["city"],
                                                     content["phone_num"], content["personality_key_words"], "", "",
                                                     content["company_name"], content["activity"])
-                newInstaUser = instaUser.InstaUser()
+                appUsers_db.insert_user(db, newAppUser)
+
+                # newInstaUser.appUserId = appUsers_db.get_user(db, newAppUser.userId).userId
+
         return result
 
 
 @app.route("/first_page_info", methods=["GET", "POST"])
 def first_page_info():
-    # configure to know who is online
     # find the cookie and start the following commands
     if not request.is_json:
-        return jsonify({'error': 'not json'})
+        letter = {
+            "response": mutual.unknownError
+        }
+        return jsonify(letter)
     # Getting post numbers
     # compare new post numbers with database
 
@@ -90,7 +126,10 @@ def login_handler():
             return result["result"]
 
     else:
-        return notJson
+        letter = {
+            "response": mutual.unknownError
+        }
+        return jsonify(letter)
 
 
 # listening on port = "127.0.0.1" on port 50000 for two Step verification code
@@ -106,8 +145,10 @@ def two_step_handler():
         print(result['result'])
         return result['result']
     else:
-        print(notJson)
-        return notJson
+        letter = {
+            "response": mutual.unknownError
+        }
+        return jsonify(letter)
 
 
 @app.route("/getFollowers", methods=['POST'])
@@ -128,8 +169,10 @@ def get_followers_list_handler():
         return jsonify(followings)
 
     else:
-        print(notJson)
-        return notJson
+        letter = {
+            "response": mutual.unknownError
+        }
+        return jsonify(letter)
 
 
 @app.route("/getFollowing", methods=['POST', 'GET'])
@@ -144,9 +187,13 @@ def get_following_list_handler():
         return "done"
 
     else:
-        print(notJson)
-        return notJson
+        letter = {
+            "response": mutual.unknownError
+        }
+        return jsonify(letter)
 
 
 if __name__ == "__main__":
+    db = mysql.connector.connect(**serverConfig.server_config)
+    print("db connected successfully")
     app.run()
