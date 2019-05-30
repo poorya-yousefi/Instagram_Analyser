@@ -24,7 +24,7 @@ col_info = 'json_path'
 def create_table_users(db):
     stmt_create = (
         "CREATE TABLE IF NOT EXISTS {0} ("
-        "       {1} INT NOT NULL PRIMARY KEY, "
+        "       {1} VARCHAR(10) NOT NULL DEFAULT '0000000000' PRIMARY KEY, "
         "       {2} timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, "
         "       {3} timestamp NOT NULL, "
         "       {4} BOOL NOT NULL DEFAULT '0', "
