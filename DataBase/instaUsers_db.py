@@ -20,6 +20,15 @@ col_pageType = 'page_types'
 col_prof_img_url = 'profile_image_url'
 col_bio = 'profile_bio'
 
+_col_insta_user_id = 'instaUser_id'
+_col_follow_state = 'following_state'
+# state types :
+# 0 : undefined
+# 1 : requested
+# 2 : accepted
+# 3 : declined
+# 4 : un_followed!!!
+_col_change_date = 'date'
 
 def __create_table_users(db):
     stmt = (
@@ -130,17 +139,6 @@ def get_user(db, _id, select_arg=col_id):
         return user
     except Error:
         return None
-
-
-_col_insta_user_id = 'instaUser_id'
-_col_follow_state = 'following_state'
-# state types :
-# 0 : undefined
-# 1 : requested
-# 2 : accepted
-# 3 : declined
-# 4 : un_followed!!!
-_col_change_date = 'date'
 
 
 def __create_table_user_folrs(db, user: InstaUser):
@@ -289,7 +287,7 @@ def main(config):
     db = mysql.connector.Connect(**config)
     # ******************************* TEST
     # date = datetime.datetime.now()
-    user = InstaUser(1, True, 14, 200, 250, "normal")
+    # user = InstaUser(1, True, 14, 200, 250, "normal")
     # user.userId = 2
     # user.signupDate = date
     # update_user(db, user)
@@ -297,9 +295,7 @@ def main(config):
     # insert_user(db, user)
     users = get_all_users(db)
     for u in users:
-        print(u.userId, u.appUserId)
-        # print(u)
-    # ******************************* TEST
+        print(str(u))
 
 
 if __name__ == '__main__':

@@ -1,13 +1,13 @@
-import ast
 from selenium import webdriver
 import time
+import ast
 
 # common errors
 no_cookie = "No cookie was found for this username "
-
+sleep = 25
 
 def get_relations(username, connection_type):
-    content ,driver = login_with_cookies(username)
+    content, driver = login_with_cookies(username)
     if content == "success":
          get_followers_list(username, connection_type, driver)
     else :
@@ -133,78 +133,43 @@ def get_followers_list(pagename, connection_type, driver):
         return users
 
 
-def get_liker(self, username, pagename):
+# following one person on instagram with id
+def request(username, target_username, driver):
 
-        sleep = 3
-        driver = self.driver
-        driver.get("https://www.instagram.com/" + pagename + "/")
-        time.sleep(2)
-        u = driver.find_element_by_class_name('g47SY')
-        print(u.text)
-        pic_hrefs = []
+    driver.get("https://www.instagram.com/" + target_username + "/")
+    time.sleep(10)
+    button = driver.find_element_by_xpath(
+            "/html/body/span/section/main/div/header/section/div[1]/button")
 
-        SCROLL_PAUSE_TIME = 1
-        nim = 0
-        cc = 0
-        user_list = []
-        last_height = driver.execute_script("return document.body.scrollHeight")
-        userslistget = driver.find_elements_by_xpath("//div[@class='v1Nh3 kIKUG  _bz0w']/a")
-        for user in userslistget:
-            print(user.get_attribute("href"))
-            user_list.append(user.get_attribute("href"))
-        print("userpic len", len(user_list))
-        while cc <= 4:
-            if len(user_list) <= int(u.text) - 3:
-                while True:
-                    # Scroll down to bottom
-                    # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                    # Wait to load page
-                    time.sleep(SCROLL_PAUSE_TIME)
-                    # Calculate new scroll height and compare with last scroll height
-                    new_height = driver.execute_script("return document.body.scrollHeight")
-                    if new_height == last_height:
-                        break
-                    last_height = new_height
-                    nim = nim + 1
-                    print(nim)
-                    userslistget = driver.find_elements_by_xpath("//div[@class='v1Nh3 kIKUG  _bz0w']/a")
-                    for user in userslistget:
-                        print(user.get_attribute("href"))
-                        user_list.append(user.get_attribute("href"))
+    if button.text == 'Following':
+        print("User with id " + username + " wants to follow " + target_username + " but was following before. !!!\n")
+        return "User with id " + username + " wants to follow " + target_username + " but was following before. !!!"
+    elif button.text == "Requested":
+        print("User with id " + username + " wants to follow " + target_username + " but was requested before. !!!\n")
+        return "User with id " + username + " wants to follow " + target_username + " but was requested before. !!!"
+    else:
+        time.sleep(5)
+        following_button = driver.find_element_by_xpath(
+         "/html/body/span/section/main/div/header/section/div[1]/button")
+        following_button.click()
+        time.sleep(sleep)
+        print("User with id " + username + " send a follow request to " + target_username + "!!\n")
+        return "Following or requesting "
 
-                print("userpic len", len(user_list))
-                cc = cc + 1
-            else:
-                break
 
-        count = 0
-        # for w in range(len(user_list)):
-        #     post_number = w+1
-        #     print(w)
-        #     print(user_list[w])
-        #     go_to_pic = driver.get(user_list[w])
-        #     try:
-        #         #for only like button
-        #         a= driver.find_element_by_class_name("zV_Nj")
-        #     except:
-        #         pass
-        #     try:
-        #         #for other pepole is like
-        #         b= driver.find_element_by_xpath("/html/body/span/section/main/div/div/article/div[2]/section[2]/div/div[2]/a[2]")
-        #     except:
-        #         pass
-        #     try:
-        #         #for views
-        #         c=driver.find_element_by_class_name("vcOH2")
-        #     except:
-        #         pass
-        a = driver.get("https://www.instagram.com/p/BxPMkrHhHya_dnNzoMzX0BfxiEls4AjuuNXMxc0/")
-        b = driver.find_element_by_xpath("/html/body/span/section/main/div/div/article/div[2]/section[2]/div/span")
-        try :
-          b.click()
-        except:
-            print("vaaaaaaaaay")
-        print("a",a)
-        a.click()
-            # btn = a.get_attribute()
+def request_list(username, following_list, driver):
+    sleep = 25
+    for i in range(len(following_list)):
+        request(username, following_list[i], driver)
+        sleep
+    return "Requested Successfully"
+
+
+def add_relation(username, following_list):
+    content, driver = login_with_cookies(username)
+    if content == "success":
+       return request_list(username, following_list, driver)
+    else:
+        return content
+
+
