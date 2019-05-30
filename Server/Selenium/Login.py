@@ -6,6 +6,7 @@ from Mutual import mutual
 import requests
 import re
 
+
 class Login:
 
     def __init__(self, username, password):
@@ -99,12 +100,80 @@ def save_cookies(username, cookies):
 
 # A function to get unique id information fast to sign up
 def get_fast_id(username):
+    info = get_req_url(username)
+    id_index = re.search('\"id\":', info)
+    return info[id_index.end()+1:id_index.end() + 11]
+
+
+# getting post numbers and other personal data
+def get_public_informations(username):
+
+    informations = {
+        "postNum": -1,
+        "folwerNum": -1,
+        "folwngNum": -1,
+        "bio": "",
+        "img_url": ""
+    }
+
+    info = get_req_url(username)
+
+    # getting the bio of the user
+    informations["bio"] = find_bio(info)
+
+    # getting post numbers information
+    infArr = find_routine_info(info)
+
+    informations["folwerNum"] = infArr[0]
+    informations["folwngNum"] = infArr[1]
+    informations["postNum"] = infArr[2]
+    informations["img_url"] = find_img_url(info)
+
+
+# finding image url for
+def find_img_url(info):
+    start_index = re.search("\"profile_pic_url_hd\":", info).end()
+    last_index = re.search("\"requested_by_viewer\"", info).start()
+    print(info[start_index+1: last_index - 2])
+    return info[start_index: last_index - 1]
+
+
+# finding the bio of a username in html request
+def find_bio(info):
+    bio_start_index = re.search("\"biography\":", info).end()
+    bio_end_index = re.search("\"blocked_by_viewer\":", info).start()
+    return info[bio_start_index + 1: bio_end_index - 2]
+
+
+# finding the number of follower , ...
+def find_routine_info(info):
+    meta_start_index = re.search("<meta content", info).end()
+
+    end_alphabet = ""
+    meta_stop_index = meta_start_index
+    while end_alphabet != "-":
+        meta_stop_index += 1
+        end_alphabet = info[meta_stop_index]
+    informations = info[meta_start_index + 2: meta_stop_index]
+
+    finalInfo = informations.split(",")
+
+    for i in range(len(finalInfo) - 1):
+        finalInfo[i] = finalInfo[i].replace(" ", "")
+        temp = finalInfo[i]
+        finalInfo[i] = temp[0:temp.index("F")]
+
+    temp = finalInfo[2]
+    finalInfo[2] = temp[0:temp.index('P')]
+
+    for i in range(len(finalInfo)):
+        finalInfo[i] = int(finalInfo[i])
+    return finalInfo
+
+
+# getting the html page
+def get_req_url(username):
     url = "https://www.instagram.com/" + username + "/"
-    infos = requests.get(url).text
-    id_index = re.search('\"id\":', infos)
-    return infos[id_index.end()+1:id_index.end() + 11]
-
-
-
+    return requests.get(url).text
 
 

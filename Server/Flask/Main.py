@@ -4,14 +4,22 @@ from flask import jsonify
 from Server.Selenium import Login, Relations
 from DataBase import appUser, appUsers_db
 from DataBase import instaUser, instaUsers_db
+from DataBase import serverConfig
 from Mutual import mutual
 import datetime
+import mysql.connector
+
+
+# defining data base
+db = None
 
 app = Flask(__name__)
+
 
 dic = {
     "user": None
 }
+
 
 # Common Errors
 notJson = "Login Failed, The received file is not json."
@@ -36,10 +44,12 @@ def sign_up():
             # check for that which this user exists or not
 
             if content["topic"] == mutual.commercialUser:
+                userInformation = Login.get_public_informations(content["username"])
                 newAppUser = appUser.CommercialUser(datetime.datetime.now(), False, content["country"], content["city"],
                                                     content["phone_num"], content["personality_key_words"], "", "",
                                                     content["company_name"], content["activity"])
-                newInstaUser = instaUser.InstaUser()
+                appUsers_db.insert_user()
+                newInstaUser = instaUser.InstaUser(newAppUser.userId)
         return result
 
 
@@ -149,4 +159,6 @@ def get_following_list_handler():
 
 
 if __name__ == "__main__":
+    db = mysql.connector.connect(**serverConfig.server_config)
+    print("db connected successfully")
     app.run()
