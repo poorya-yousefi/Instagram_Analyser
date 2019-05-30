@@ -2,12 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 from timeit import default_timer as timer
-
-import re
 from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import StaleElementReferenceException
-import requests
-import random
+
 
 start = timer()
 class InstagramBot:

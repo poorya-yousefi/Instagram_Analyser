@@ -2,6 +2,10 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from Server.Selenium import Login, Relations
+from DataBase import appUser, appUsers_db
+from DataBase import instaUser, instaUsers_db
+from Mutual import mutual
+import datetime
 
 app = Flask(__name__)
 
@@ -13,7 +17,33 @@ dic = {
 notJson = "Login Failed, The received file is not json."
 
 
-@app.route("/first_page_info", methods=["GET", "Post"])
+@app.route("/sign_up", methods=["POST"])
+def sign_up():
+    if not request.is_json:
+        return jsonify({'error': 'not json'})
+    else:
+        # getting the json file from client
+        content = request.get_json()
+
+        # trying to login to the page to see can we login or not
+        user = Login.Login(content["username"], content["password"])
+
+        # check that can we log as a username or not
+        result = user.login()
+        if result["response"] == "000":
+            print("A success login for " + content["username"])
+
+            # check for that which this user exists or not
+
+            if content["topic"] == mutual.commercialUser:
+                newAppUser = appUser.CommercialUser(datetime.datetime.now(), False, content["country"], content["city"],
+                                                    content["phone_num"], content["personality_key_words"], "", "",
+                                                    content["company_name"], content["activity"])
+                newInstaUser = instaUser.InstaUser()
+        return result
+
+
+@app.route("/first_page_info", methods=["GET", "POST"])
 def first_page_info():
     # configure to know who is online
     # find the cookie and start the following commands
@@ -47,6 +77,7 @@ def login_handler():
         print("Login Json contents: ", content)
 
         # Check the database for username and password
+        app = appUser.AppUser(datetime.datetime.now(), )
 
         # log in to the page with selenium
         user = Login.Login(content["username"], content["password"])
