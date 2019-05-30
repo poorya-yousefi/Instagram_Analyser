@@ -19,6 +19,7 @@ col_followings_table = 'followings_table_name'
 col_pageType = 'page_types'
 col_prof_img_url = 'profile_image_url'
 col_bio = 'profile_bio'
+col_name = 'full_name'
 
 _col_insta_user_id = 'instaUser_id'
 _col_follow_state = 'following_state'
@@ -29,6 +30,7 @@ _col_follow_state = 'following_state'
 # 3 : declined
 # 4 : un_followed!!!
 _col_change_date = 'date'
+
 
 def __create_table_users(db):
     stmt = (
@@ -45,11 +47,13 @@ def __create_table_users(db):
         "       {10} VARCHAR(64) DEFAULT 'N/A', "
         "       {11} VARCHAR(255) DEFAULT 'N/A', "
         "       {12} VARCHAR(255) DEFAULT 'N/A', "
-        "       {13} VARCHAR(255) DEFAULT 'N/A'"
+        "       {13} VARCHAR(255) DEFAULT 'N/A', "
+        "       {14} VARCHAR(255) DEFAULT 'N/A'"
         ")"
     ).format(table_name, col_id, col_app_user_id, col_insta_id, col_unique_id, col_isPrivate, col_posts_count,
              col_followers_count,
-             col_followings_count, col_followers_table, col_followings_table, col_pageType, col_prof_img_url, col_bio)
+             col_followings_count, col_followers_table, col_followings_table, col_pageType, col_prof_img_url, col_bio,
+             col_name)
     try:
         cursor = db.cursor()
         cursor.execute(stmt)
@@ -65,14 +69,14 @@ def insert_user(db, user: InstaUser):
     args = (
         user.appUserId, user.instaId, user.uniqueId, user.isPrivate, user.postsCount, user.folrs_count,
         user.folng_count,
-        user.pageType, user.img_url, user.bio
+        user.pageType, user.img_url, user.bio, user.fullName
     )
     stmt = "INSERT INTO {0} " \
-           "({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})" \
-           " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)".format(table_name, col_app_user_id, col_insta_id, col_isPrivate,
+           "({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})" \
+           " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)".format(table_name, col_app_user_id, col_insta_id, col_isPrivate,
                                                             col_unique_id, col_posts_count,
                                                             col_followers_count, col_followings_count, col_pageType,
-                                                            col_prof_img_url, col_bio)
+                                                            col_prof_img_url, col_bio, col_name)
     try:
         cursor = db.cursor()
         cursor.execute(stmt, args)
@@ -86,13 +90,13 @@ def insert_user(db, user: InstaUser):
 def update_user(db, user: InstaUser):
     if not __create_table_users(db):
         return False
-    stmt = "UPDATE {0} SET {1} = %s,{2} = %s,{3} = %s,{4} = %s,{5} = %s,{6} = %s,{7} = %s, {8} = %s" \
-           " WHERE {9} = {10}".format(table_name, col_isPrivate, col_posts_count, col_followers_count,
+    stmt = "UPDATE {0} SET {1} = %s,{2} = %s,{3} = %s,{4} = %s,{5} = %s,{6} = %s,{7} = %s, {8} = %s, {9} = %s" \
+           " WHERE {10} = {11}".format(table_name, col_isPrivate, col_posts_count, col_followers_count,
                                       col_followings_count, col_pageType, col_insta_id, col_prof_img_url,
-                                      col_bio, col_id, user.userId)
+                                      col_bio,col_name, col_id, user.userId)
     args = (
         user.isPrivate, user.postsCount, user.folrs_count, user.folng_count, user.pageType, user.instaId, user.img_url,
-        user.bio
+        user.bio, user.fullName
     )
     try:
         cursor = db.cursor()
@@ -128,13 +132,13 @@ def get_all_users(db: mysql.connector, order_by=col_id, sort_arg='ASC'):
 
 
 def get_user(db, _id, select_arg=col_id):
-    stmt = "SELECT * FROM {0} WHERE {1} = {2}".format(table_name, select_arg, _id)
+    stmt = "SELECT * FROM {0} WHERE {1} = '{2}'".format(table_name, select_arg, _id)
     try:
         cursor = db.cursor()
         cursor.execute(stmt)
         res = cursor.fetchone()
 
-        user = InstaUser(res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9], res[10])
+        user = InstaUser(res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9], res[10], res[11])
         user.userId = res[0]
         return user
     except Error:
