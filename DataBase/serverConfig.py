@@ -1,7 +1,7 @@
 server_config = {
         'host': 'localhost',
-        'user': 'root',
-        'password': '',
-        'database': 'instagram_analyser_db'
+        'user': 'admin_poorya',
+        'password': 'password123',
+        'database': 'instagramanalyser_db'
     }
 

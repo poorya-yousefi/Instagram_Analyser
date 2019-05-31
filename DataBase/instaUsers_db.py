@@ -137,7 +137,8 @@ def get_user(db, _id, select_arg=col_id):
         cursor = db.cursor()
         cursor.execute(stmt)
         res = cursor.fetchone()
-
+        if res is None:
+            return None
         user = InstaUser(res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9], res[10])
         user.userId = res[0]
         return user
