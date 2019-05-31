@@ -49,7 +49,7 @@ class Login:
         while True:
             try:
                 self.driver.find_element_by_xpath("//p[@id='slfErrorAlert']")
-                self.letter["response"] = mutual.incorrectPass
+                self.letter["response"] = mutual.incorrect_pass
                 self.driver.close()
                 return self.letter
             except NoSuchElementException:
@@ -58,7 +58,7 @@ class Login:
         while True:
             try:
                 self.driver.find_element_by_xpath("//input[@name='verificationCode']")
-                self.letter["response"] = mutual.twoStepEn
+                self.letter["response"] = mutual.two_step_en
                 self.driver.close()
                 return self.letter
 
@@ -68,7 +68,7 @@ class Login:
         # saving the cookies for this user
         save_cookies(self.userName, self.driver.get_cookies())
         self.driver.close()
-        self.letter["response"] = mutual.successLogin
+        self.letter["response"] = mutual.success_login
         return self.letter
 
     # two step verification code for login to instagram
@@ -81,12 +81,12 @@ class Login:
         while True:
             try:
                 self.driver.find_element_by_xpath("//p[@id='twoFactorErrorAlert']")
-                self.letter["response"] = mutual.incorrectPass
+                self.letter["response"] = mutual.incorrect_pass
                 return self.letter
             except NoSuchElementException:
                 print("such kind of elements didn't find")
                 break
-        self.letter["response"]= mutual.successLogin
+        self.letter["response"] = mutual.success_login
         return self.letter
 
 
@@ -109,9 +109,9 @@ def get_fast_id(username):
 def get_public_informations(username):
 
     informations = {
-        "postNum": -1,
-        "folwerNum": -1,
-        "folwngNum": -1,
+        "post_num": -1,
+        "follower_num": -1,
+        "following_num": -1,
         "bio": "",
         "img_url": "",
         "is_private": None,
@@ -124,11 +124,11 @@ def get_public_informations(username):
     informations["bio"] = find_bio(info)
 
     # getting post numbers information
-    infArr = find_routine_info(info)
+    inf_arr = find_routine_info(info)
 
-    informations["folwerNum"] = infArr[0]
-    informations["folwngNum"] = infArr[1]
-    informations["postNum"] = infArr[2]
+    informations["follower_num"] = inf_arr[0]
+    informations["following_num"] = inf_arr[1]
+    informations["post_num"] = inf_arr[2]
     informations["img_url"] = find_img_url(info)
     informations["is_private"] = get_is_private(info)
     informations["name"] = get_name_user(info)
@@ -167,19 +167,19 @@ def find_routine_info(info):
         end_alphabet = info[meta_stop_index]
     informations = info[meta_start_index + 2: meta_stop_index]
 
-    finalInfo = informations.split(",")
+    final_info = informations.split(",")
 
-    for i in range(len(finalInfo) - 1):
-        finalInfo[i] = finalInfo[i].replace(" ", "")
-        temp = finalInfo[i]
-        finalInfo[i] = temp[0:temp.index("F")]
+    for i in range(len(final_info) - 1):
+        final_info[i] = final_info[i].replace(" ", "")
+        temp = final_info[i]
+        final_info[i] = temp[0:temp.index("F")]
 
-    temp = finalInfo[2]
-    finalInfo[2] = temp[0:temp.index('P')]
+    temp = final_info[2]
+    final_info[2] = temp[0:temp.index('P')]
 
-    for i in range(len(finalInfo)):
-        finalInfo[i] = int(finalInfo[i])
-    return finalInfo
+    for i in range(len(final_info)):
+        final_info[i] = int(final_info[i])
+    return final_info
 
 
 # getting the html page

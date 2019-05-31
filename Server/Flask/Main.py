@@ -14,17 +14,27 @@ db = None
 
 app = Flask(__name__)
 
+letter = {
+    "response": "",
+    "previous_post_num": "",
+    "post_num": "",
+    "previous_following_num": "",
+    "following_num": "",
+    "previous_follower_num": "",
+    "follower_num": "",
+    "img_url": "",
+    "name": "",
+    "bio": ""
+}
 dic = {
     "user": None
 }
 
 
-@app.route("/sign_up", methods=["POST"])
+@app.route("/sign_up", methods=["POST", "GET"])
 def sign_up_handler():
     if not request.is_json:
-        letter = {
-            "response": mutual.unknownError
-        }
+        letter["response"] = mutual.unknown_error
         return jsonify(letter)
     else:
         # getting the json file from client
@@ -36,72 +46,88 @@ def sign_up_handler():
         # check that can we log as a username or not
         result = user.login()
 
-        uniqueID = Login.get_fast_id(content["username"])
+        unique_id = Login.get_fast_id(content["username"])
 
-        if instaUsers_db.get_user(db, uniqueID, instaUsers_db.col_unique_id) is not None:
-            if appUsers_db.get_user(db, uniqueID, select_arg="unique_id") is not None:
-                result["response"] = mutual.existingUser
-                return result["response"]
+        if instaUsers_db.get_user(db, unique_id, instaUsers_db.col_unique_id) is not None:
+            if appUsers_db.get_user(db, unique_id) is not None:
+                result["response"] = mutual.existing_user
+                return jsonify(result)
             # if we have an instaUser just make an app user
             else:
-                # userInformation = Login.get_public_informations(content["username"])
-                newAppUser = appUser.CommercialUser(uniqueID, datetime.datetime.now(), False, content["country"],
-                                                    content["city"],
-                                                    content["phone_num"], content["personality_key_words"], "", "",
-                                                    content["company_name"], content["activity"])
-                appUsers_db.insert_user(db, newAppUser)
-                editedInstaUser = instaUsers_db.get_user(db, uniqueID, select_arg=uniqueID)
-                editedInstaUser.appUserId = appUsers_db.get_user()
+                # user_information = Login.get_public_informations(content["username"])
+                new_app_user = appUser.CommercialUser(unique_id, datetime.datetime.now(), False, content["country"],
+                                                      content["city"],
+                                                      content["phone_num"], content["personality_key_words"], "", "",
+                                                      content["company_name"], content["activity"])
+                appUsers_db.insert_user(db, new_app_user)
+                return jsonify(result)
 
-                return result
+        if result["response"] == mutual.success_login:
+            print("A success sign up for " + content["username"] + ". ")
 
-        if result["response"] == "000":
-            print("A success login for " + content["username"])
+            if content["topic"] == mutual.commercial_user:
+                user_information = Login.get_public_informations(content["username"])
+                new_insta_user = instaUser.InstaUser(unique_id, content["username"], unique_id,
+                                                     user_information["is_private"],
+                                                     user_information["post_num"], user_information["follower_num"],
+                                                     user_information["following_num"], content["page_type"],
+                                                     user_information["img_url"], user_information["bio"],
+                                                     user_information["name"])
 
-            if content["topic"] == mutual.commercialUser:
-                userInformation = Login.get_public_informations(content["username"])
-                newInstaUser = instaUser.InstaUser(-1, content["username"], uniqueID, userInformation["is_private"],
-                                                   userInformation["postNum"], userInformation["folwerNum"],
-                                                   userInformation["folwngNum"], content["page_type"],
-                                                   userInformation["img_url"], userInformation["bio"])
+                instaUsers_db.insert_user(db, new_insta_user)
 
-                instaUsers_db.insert_user(db, newInstaUser)
+                new_app_user = appUser.CommercialUser(unique_id, datetime.datetime.now(), False, content["country"],
+                                                      content["city"],
+                                                      content["phone_num"], content["personality_key_words"], "", "",
+                                                      content["company_name"], content["activity"])
+                appUsers_db.insert_user(db, new_app_user)
 
-                newAppUser = appUser.CommercialUser(datetime.datetime.now(), False, content["country"], content["city"],
-                                                    content["phone_num"], content["personality_key_words"], "", "",
-                                                    content["company_name"], content["activity"])
-                appUsers_db.insert_user(db, newAppUser)
+                # new_insta_user.appUserId = appUsers_db.get_user(db, new_app_user.userId).userId
 
-                # newInstaUser.appUserId = appUsers_db.get_user(db, newAppUser.userId).userId
-
-        return result
+        return jsonify(result)
 
 
 @app.route("/first_page_info", methods=["GET", "POST"])
 def first_page_info():
     # find the cookie and start the following commands
     if not request.is_json:
-        letter = {
-            "response": mutual.unknownError
-        }
+        letter["response"] = mutual.unknown_error
         return jsonify(letter)
-    # Getting post numbers
-    # compare new post numbers with database
 
-    # Getting followers numbers
-    # compare new followers numbers with database
+    # getting the json file from client
+    content = request.get_json()
 
-    # Getting followings numbers
-    # compare new followings numbers with database
+    unique_id = Login.get_fast_id(content["username"])
 
-    # return new parameters number and difference new and old
-    return jsonify(
-        {
-            'posts': 17,
-            'followers': 250,
-            'followings': 278
-        }
-    )
+    # previous information
+    in_user = instaUsers_db.get_user(db, unique_id, instaUsers_db.col_unique_id)
+    letter["previous_post_num"] = in_user.postsCount
+    letter["previous_follower_num"] = in_user.folrs_count
+    letter["previous_following_num"] = in_user.folng_count
+
+    # new Informations
+    new_inf = Login.get_public_informations(content["username"])
+    letter["post_num"] = new_inf["post_num"]
+    letter["follower_num"] = new_inf["follower_num"]
+    letter["following_num"] = new_inf["following_num"]
+    letter["bio"] = new_inf["bio"]
+    letter["img_url"] = new_inf["img_url"]
+    letter["name"] = new_inf["name"]
+
+    # updating database
+    editing_insta_user = instaUsers_db.get_user(db, unique_id, instaUsers_db.col_unique_id)
+    editing_insta_user.postsCount = new_inf["post_num"]
+    editing_insta_user.folrs_count = new_inf["follower_num"]
+    editing_insta_user.folng_count = new_inf["following_num"]
+    editing_insta_user.bio = new_inf["bio"]
+    editing_insta_user.img_url = new_inf["img_url"]
+    editing_insta_user.fullName = new_inf["name"]
+
+    instaUsers_db.update_user(db, editing_insta_user)
+
+    letter["response"] = mutual.success_process
+
+    return jsonify(letter)
 
 
 # listening on port = "127.0.0.1" on port 50000 for login
@@ -127,7 +153,7 @@ def login_handler():
 
     else:
         letter = {
-            "response": mutual.unknownError
+            "response": mutual.unknown_error
         }
         return jsonify(letter)
 
@@ -195,5 +221,5 @@ def get_following_list_handler():
 
 if __name__ == "__main__":
     db = mysql.connector.connect(**serverConfig.server_config)
-    print("db connected successfully")
+    print("........ db connected successfully ........")
     app.run()
