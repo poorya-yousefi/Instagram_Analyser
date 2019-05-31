@@ -87,6 +87,7 @@ class Login:
                 print("such kind of elements didn't find")
                 break
         self.letter["response"] = mutual.success_login
+        self.letter["user"] = self.driver
         return self.letter
 
 

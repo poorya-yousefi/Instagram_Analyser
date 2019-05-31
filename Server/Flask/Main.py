@@ -46,6 +46,12 @@ def sign_up_handler():
         # check that can we log as a username or not
         result = user.login()
 
+        if result["response"] is mutual.incorrect_pass:
+            return jsonify(result)
+        elif result["response"] is mutual.two_step_en:
+            dic["user"] = result["user"]
+            return jsonify(result)
+
         unique_id = Login.get_fast_id(content["username"])
 
         if instaUsers_db.get_user(db, unique_id, instaUsers_db.col_unique_id) is not None:
@@ -65,7 +71,7 @@ def sign_up_handler():
         if result["response"] == mutual.success_login:
             print("A success sign up for " + content["username"] + ". ")
 
-            if content["topic"] == mutual.commercial_user:
+            if content["page_type"] == mutual.commercial_user:
                 user_information = Login.get_public_informations(content["username"])
                 new_insta_user = instaUser.InstaUser(content["username"], unique_id,
                                                      user_information["is_private"],
@@ -82,7 +88,6 @@ def sign_up_handler():
                                                       content["company_name"], content["activity"])
                 appUsers_db.insert_user(db, new_app_user)
 
-                # new_insta_user.appUserId = appUsers_db.get_user(db, new_app_user.userId).userId
 
         return jsonify(result)
 
