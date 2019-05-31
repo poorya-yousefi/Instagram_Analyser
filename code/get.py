@@ -10,13 +10,17 @@ import requests
 import random
 
 start = timer()
+
+
 class InstagramBot:
 
     def __init__(self):
         firefox_profile = webdriver.FirefoxProfile()
-        firefox_profile.set_preference('permissions.default.image',2)
-        firefox_profile.set_preference('dom.ipc.plugins.enabled.libflashplayer.so','false')
-        self.driver = webdriver.Firefox(executable_path=r"/root/Desktop/py/geckodriver", firefox_profile=firefox_profile)
+        firefox_profile.set_preference('permissions.default.image', 2)
+        firefox_profile.set_preference('dom.ipc.plugins.enabled.libflashplayer.so', 'false')
+        self.driver = webdriver.Firefox(
+            executable_path=r"C:\Users\erfan\.wdm\geckodriver\v0.24.0\win64\geckodriver.exe",
+            firefox_profile=firefox_profile)
         # self.driver.manage().getCookies()
 
     def closeBrowser(self):
@@ -32,7 +36,7 @@ class InstagramBot:
         # login_button.click()
         time.sleep(sleep)
         username = input("username:  ")
-        password=input("password:  ")
+        password = input("password:  ")
         user_name_elem = driver.find_element_by_xpath("//input[@name='username']")
         user_name_elem.clear()
         user_name_elem.send_keys(username)
@@ -58,7 +62,6 @@ class InstagramBot:
             except NoSuchElementException:
                 break
 
-
         while True:
             try:
                 driver.find_element_by_xpath("//input[@name='verificationCode']")
@@ -71,21 +74,24 @@ class InstagramBot:
             except NoSuchElementException:
                 break
         print("login succesful")
-  # get page name and creat a list of followers
+
+    # get page name and creat a list of followers
     def get_followers_list(self, pagename):
 
-        file = open("/root/Desktop/py/database/"+pagename+"followers.txt","w+")
+        file = open("/root/Desktop/py/database/" + pagename + "followers.txt", "w+")
         sleep = 4
         driver = self.driver
 
         try:
             driver.get("https://www.instagram.com/" + pagename + "/")
             time.sleep(sleep)
-            allfoll = (driver.find_element_by_xpath("//*[@id='react-root']/section/main/div/header/section/ul/li[2]/a/span"))
+            allfoll = (
+                driver.find_element_by_xpath("//*[@id='react-root']/section/main/div/header/section/ul/li[2]/a/span"))
             allfoll = allfoll.get_attribute('title')
             allfoll = allfoll.replace(',', '')
             allfoll = int(allfoll)
-            followers_button = driver.find_element_by_xpath("//*[@id='react-root']/section/main/div/header/section/ul/li[2]/a")
+            followers_button = driver.find_element_by_xpath(
+                "//*[@id='react-root']/section/main/div/header/section/ul/li[2]/a")
             followers_button.click()
             time.sleep(sleep)
             driver.implicitly_wait(2)
@@ -104,7 +110,7 @@ class InstagramBot:
             cc = 0
             userslistget = driver.find_elements_by_xpath("//div[@class='d7ByH']/a")
 
-            while cc<=4:
+            while cc <= 4:
                 if len(userslistget) <= allfoll - 3:
                     while True:
                         # Scroll down to bottom
@@ -113,7 +119,8 @@ class InstagramBot:
                         # Wait to load page
                         time.sleep(SCROLL_PAUSE_TIME)
                         # Calculate new scroll height and compare with last scroll height
-                        new_height = driver.execute_script("return arguments[0].scrollTop = arguments[0].scrollHeight",dialog)
+                        new_height = driver.execute_script("return arguments[0].scrollTop = arguments[0].scrollHeight",
+                                                           dialog)
                         if new_height == last_height:
                             break
                         last_height = new_height
@@ -130,24 +137,23 @@ class InstagramBot:
             file.write("page name is:\n{}\n".format(pagename))
             if len(userslistget) <= allfoll - 5:
                 print("broken file")
-                file.write("broken file"+"\n")
+                file.write("broken file" + "\n")
             for user in userslistget:
                 print(user.get_attribute("title"))
-                file.write(str(user.get_attribute("title"))+"\n")
+                file.write(str(user.get_attribute("title")) + "\n")
             file.write(str(len(userslistget)))
             print(len(userslistget))
             file.close()
         except NoSuchElementException:
             pass
 
-
-    def find_network(self,filename):
-        file=open("/root/Desktop/py/clean/"+filename+".txt")
+    def find_network(self, filename):
+        file = open("/root/Desktop/py/clean/" + filename + ".txt")
         done_file = open("/root/Desktop/py/done/" + filename + ".txt", "a+")
-        breakpointfile = open("/root/Desktop/py/done/" + filename + "breakpoint.txt","a+")
-        breakpointfile.write("0"+"\n")
+        breakpointfile = open("/root/Desktop/py/done/" + filename + "breakpoint.txt", "a+")
+        breakpointfile.write("0" + "\n")
         breakpointfile.close()
-        breakpointfile = open("/root/Desktop/py/done/" + filename + "breakpoint.txt","r+")
+        breakpointfile = open("/root/Desktop/py/done/" + filename + "breakpoint.txt", "r+")
         read_breakpointfile = breakpointfile.readlines()
         # print(str(read_file))
         # print(str(read_breakpointfile))
@@ -155,17 +161,18 @@ class InstagramBot:
             breakpointcount = read_breakpointfile[-2]
         except:
             breakpointcount = read_breakpointfile[-1]
-        read_file=file.readlines()
+        read_file = file.readlines()
         print(breakpointcount)
         print(int(read_file[-1]))
-        for i in range(int(breakpointcount),int(read_file[-1])):
-            a= read_file[i].replace("[","")
-            b = a.replace("]","")
-            c= b.replace(",","")
+        for i in range(int(breakpointcount), int(read_file[-1])):
+            a = read_file[i].replace("[", "")
+            b = a.replace("]", "")
+            c = b.replace(",", "")
             try:
                 self.driver.get("https://www.instagram.com/" + c + "/")
                 # print(self.driver.find_element_by_xpath("/html/body/span/section/main/div/header/section/ul/li[2]/a/span").get_attribute("title"))
-                q = self.driver.find_element_by_xpath("/html/body/span/section/main/div/header/section/ul/li[2]/a/span").get_attribute("title")
+                q = self.driver.find_element_by_xpath(
+                    "/html/body/span/section/main/div/header/section/ul/li[2]/a/span").get_attribute("title")
                 q = q.replace(",", "")
                 breakpointcount = int(breakpointcount) + 1
                 breakpointfile.write(str(breakpointcount) + "\n")

@@ -172,6 +172,25 @@ def two_step_handler():
         # getting the Login objects
         user = dic["user"]
         result = user.two_step(content['code'])
+
+        unique_id = Login.get_fast_id(content["username"])
+
+        if result["response"] == mutual.success_login:
+            user_information = Login.get_public_informations(content["username"])
+            new_insta_user = instaUser.InstaUser(content["username"], unique_id,
+                                                 user_information["is_private"],
+                                                 user_information["post_num"], user_information["follower_num"],
+                                                 user_information["following_num"], content["page_type"],
+                                                 user_information["img_url"], user_information["bio"],
+                                                 user_information["name"])
+
+            instaUsers_db.insert_user(db, new_insta_user)
+
+            new_app_user = appUser.CommercialUser(unique_id, datetime.datetime.now(), False, content["country"],
+                                                  content["city"],
+                                                  content["phone_num"], content["personality_key_words"], "", "",
+                                                  content["company_name"], content["activity"])
+            appUsers_db.insert_user(db, new_app_user)
         return result['response']
     else:
         letter = {
