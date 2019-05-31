@@ -6,6 +6,7 @@ import ast
 no_cookie = "No cookie was found for this username "
 sleep = 25
 
+
 def get_relations(username, connection_type):
     content, driver = login_with_cookies(username)
     if content == "success":

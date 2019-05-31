@@ -67,7 +67,7 @@ def sign_up_handler():
 
             if content["topic"] == mutual.commercial_user:
                 user_information = Login.get_public_informations(content["username"])
-                new_insta_user = instaUser.InstaUser(unique_id, content["username"], unique_id,
+                new_insta_user = instaUser.InstaUser(content["username"], unique_id,
                                                      user_information["is_private"],
                                                      user_information["post_num"], user_information["follower_num"],
                                                      user_information["following_num"], content["page_type"],

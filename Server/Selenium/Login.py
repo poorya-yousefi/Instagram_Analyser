@@ -96,6 +96,7 @@ def save_cookies(username, cookies):
         file = open("../../inf/cookies/" + username + ".data", "w+")
         for cookie in cookies:
             file.write(str(cookie) + '\n')
+        file.close()
 
 
 # A function to get unique id information fast to sign up

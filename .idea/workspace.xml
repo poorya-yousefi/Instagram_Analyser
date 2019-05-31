@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="685ff3cd-16e1-41ba-ba7d-e737949dce81" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Mutual/mutual.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/code/clk.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/erfan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Instagram_Analyser.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Instagram_Analyser.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataBase/req_test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataBase/serverConfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataBase/serverConfig.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/Flask/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Flask/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Flask/geckodriver.log" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Flask/geckodriver.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/Selenium/Login.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Selenium/Login.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Selenium/geckodriver.log" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Selenium/geckodriver.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/bs4.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/bs4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Selenium/Relations.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Selenium/Relations.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +18,48 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/Selenium/Login.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1308">
+              <caret line="140" column="20" selection-start-line="140" selection-start-column="20" selection-end-line="140" selection-end-column="20" />
+              <folding>
+                <element signature="e#3279#3434#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Server/Selenium/Relations.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="176" lean-forward="true" selection-start-line="176" selection-end-line="176" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+                <element signature="e#186#358#0" />
+                <element signature="e#399#1330#0" />
+                <element signature="e#1363#1658#0" />
+                <element signature="e#1728#5086#0" />
+                <element signature="e#5186#6298#0" />
+                <element signature="e#6357#6511#0" />
+                <element signature="e#6562#6731#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/Flask/Main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1122">
+              <caret line="48" column="17" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -46,24 +87,25 @@
         <option value="$PROJECT_DIR$/DataBase/online_users.py" />
         <option value="$PROJECT_DIR$/DataBase/posts_db.py" />
         <option value="$PROJECT_DIR$/DataBase/instaUser.py" />
-        <option value="$PROJECT_DIR$/DataBase/instaUsers_db.py" />
         <option value="$PROJECT_DIR$/Server/test.py" />
         <option value="$PROJECT_DIR$/Server/Selenium/test.py" />
         <option value="$PROJECT_DIR$/inf/cookies/iBotErfan.data" />
         <option value="$PROJECT_DIR$/code/bs4.py" />
-        <option value="$PROJECT_DIR$/Server/Selenium/Relations.py" />
         <option value="$PROJECT_DIR$/DataBase/req_test.py" />
-        <option value="$PROJECT_DIR$/Server/Selenium/Login.py" />
         <option value="$PROJECT_DIR$/Mutual/mutual.py" />
         <option value="$PROJECT_DIR$/code/clk.py" />
         <option value="$PROJECT_DIR$/DataBase/appUser.py" />
+        <option value="$PROJECT_DIR$/Server/Selenium/Login.py" />
         <option value="$PROJECT_DIR$/Server/Flask/Main.py" />
+        <option value="$PROJECT_DIR$/DataBase/instaUsers_db.py" />
+        <option value="$PROJECT_DIR$/DataBase/serverConfig.py" />
+        <option value="$PROJECT_DIR$/Server/Selenium/Relations.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-15" />
-    <option name="width" value="1948" />
+    <option name="width" value="1950" />
     <option name="height" value="2075" />
   </component>
   <component name="ProjectView">
@@ -71,7 +113,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -79,10 +120,27 @@
               <item name="Instagram_Analyser" type="b2602c69:ProjectViewProjectNode" />
               <item name="Instagram_Analyser" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Instagram_Analyser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Instagram_Analyser" type="462c0819:PsiDirectoryNode" />
+              <item name="DataBase" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Instagram_Analyser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Instagram_Analyser" type="462c0819:PsiDirectoryNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Instagram_Analyser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Instagram_Analyser" type="462c0819:PsiDirectoryNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="Selenium" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -108,7 +166,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.appUsers_db">
+  <component name="RunManager" selected="Python.Main">
     <configuration name="Login" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Instagram_Analyser" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -130,7 +188,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Relations" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Instagram_Analyser" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -138,11 +196,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Server/Selenium" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Server/Flask" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Server/Selenium/Relations.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Server/Flask/Main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -216,11 +274,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Main" />
         <item itemvalue="Python.appUsers_db" />
         <item itemvalue="Python.clk" />
         <item itemvalue="Python.Login" />
         <item itemvalue="Python.req_test" />
-        <item itemvalue="Python.Relations" />
       </list>
     </recent_temporary>
   </component>
@@ -289,13 +347,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22838284" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22836694" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32768363" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49966866" weight="0.2881356" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49966866" visible="true" weight="0.28767124" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -366,36 +425,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/Selenium/Relations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="175" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataBase/file.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="280" column="683" selection-start-line="280" selection-start-column="678" selection-end-line="280" selection-end-column="683" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/DataBase/file.txt" />
     <entry file="file://$PROJECT_DIR$/code/try.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataBase/req_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/DataBase/req_test.py" />
     <entry file="file://$PROJECT_DIR$/code/final.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -417,37 +451,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/Selenium/Login.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
-          <folding>
-            <element signature="e#273#919#0" />
-            <element signature="e#998#1017#0" />
-            <element signature="e#1077#2448#0" />
-            <element signature="e#2544#3193#0" />
-            <element signature="e#3271#3405#0" />
-            <element signature="e#3497#3681#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/Flask/Main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="41" column="28" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DataBase/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataBase/serverConfig.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="17" lean-forward="true" selection-start-column="17" selection-end-column="17" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DataBase/posts_db.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -469,13 +474,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataBase/instaUsers_db.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="268" selection-start-line="268" selection-end-line="268" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DataBase/instaUser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
@@ -490,6 +488,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="427">
           <caret line="28" column="70" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataBase/instaUsers_db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="145" lean-forward="true" selection-start-line="145" selection-end-line="145" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataBase/serverConfig.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/Flask/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1122">
+          <caret line="48" column="17" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/Selenium/Login.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1308">
+          <caret line="140" column="20" selection-start-line="140" selection-start-column="20" selection-end-line="140" selection-end-column="20" />
+          <folding>
+            <element signature="e#3279#3434#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/Selenium/Relations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="176" lean-forward="true" selection-start-line="176" selection-end-line="176" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+            <element signature="e#186#358#0" />
+            <element signature="e#399#1330#0" />
+            <element signature="e#1363#1658#0" />
+            <element signature="e#1728#5086#0" />
+            <element signature="e#5186#6298#0" />
+            <element signature="e#6357#6511#0" />
+            <element signature="e#6562#6731#0" />
+          </folding>
         </state>
       </provider>
     </entry>
