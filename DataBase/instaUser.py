@@ -18,9 +18,8 @@ class InstaUser:
         self.fullName = full_name
 
     def __str__(self):
-        return "<Id: {0} | tbl_folrs: {1} | tbl_folng: {2} | instaId: {3} | uniqueId: {4} | appUserId: {5} | " \
-               "isPrivate: {6} | postsCount: {7} | folrs_count: {8} | folng_count: {9} | pageType: {10} | img_url: {11} | " \
-               "bio: {12} | fullName: {13}>".format(self.userId, self.tbl_folrs, self.tbl_folng, self.instaId, self.uniqueId,
-                                   self.appUserId,
+        return "<Id: {0} | tbl_folrs: {1} | tbl_folng: {2} | instaId: {3} | uniqueId: {4} | " \
+               "isPrivate: {5} | postsCount: {6} | folrs_count: {7} | folng_count: {8} | pageType: {9} | img_url: {10} | " \
+               "bio: {11} | fullName: {12}>".format(self.userId, self.tbl_folrs, self.tbl_folng, self.instaId, self.uniqueId,
                                    self.isPrivate, self.postsCount, self.folrs_count, self.folng_count, self.pageType,
                                    self.img_url, self.bio, self.fullName)
