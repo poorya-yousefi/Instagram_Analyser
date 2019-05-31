@@ -67,14 +67,15 @@ def insert_user(db, user: InstaUser):
         return False
     args = (
         user.instaId, user.isPrivate, user.uniqueId, user.postsCount, user.folrs_count,
-        user.folng_count,
+        user.folng_count, user.tbl_folrs, user.tbl_folng,
         user.pageType, user.img_url, user.bio, user.fullName
     )
     stmt = "INSERT INTO {0} " \
-           "({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})" \
-           " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)".format(table_name, col_insta_id, col_isPrivate,
+           "({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})" \
+           " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)".format(table_name, col_insta_id, col_isPrivate,
                                                             col_unique_id, col_posts_count,
-                                                            col_followers_count, col_followings_count, col_pageType,
+                                                            col_followers_count, col_followings_count,
+                                                            col_followers_table, col_followings_table, col_pageType,
                                                             col_prof_img_url, col_bio, col_name)
     try:
         cursor = db.cursor()
