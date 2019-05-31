@@ -131,7 +131,7 @@ def get_all_users(db: mysql.connector, order_by=col_id, sort_arg='ASC'):
 
 
 def get_user(db, _id, select_arg=col_id):
-    stmt = "SELECT * FROM {0} WHERE {1} = '{2}'".format(table_name, select_arg, _id)
+    stmt = "SELECT * FROM {0} WHERE {1} = {2}".format(table_name, select_arg, _id)
     try:
         cursor = db.cursor()
         cursor.execute(stmt)
