@@ -25,7 +25,8 @@ class Login:
             executable_path=r'C:\Users\erfan\.wdm\geckodriver\v0.24.0\win64\geckodriver.exe',
             firefox_profile=firefox_profile)
         self.letter = {
-           "response": ""
+           "response": "",
+            "user": None
         }
 
     # closing a browser after finishing
@@ -59,7 +60,6 @@ class Login:
             try:
                 self.driver.find_element_by_xpath("//input[@name='verificationCode']")
                 self.letter["response"] = mutual.two_step_en
-                self.driver.close()
                 return self.letter
 
             except NoSuchElementException:
@@ -67,8 +67,8 @@ class Login:
 
         # saving the cookies for this user
         save_cookies(self.userName, self.driver.get_cookies())
-        self.driver.close()
         self.letter["response"] = mutual.success_login
+        self.driver.close()
         return self.letter
 
     # two step verification code for login to instagram
@@ -87,7 +87,6 @@ class Login:
                 print("such kind of elements didn't find")
                 break
         self.letter["response"] = mutual.success_login
-        self.letter["user"] = self.driver
         return self.letter
 
 

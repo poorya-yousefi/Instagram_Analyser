@@ -49,7 +49,7 @@ def sign_up_handler():
         if result["response"] is mutual.incorrect_pass:
             return jsonify(result)
         elif result["response"] is mutual.two_step_en:
-            dic["user"] = result["user"]
+            dic["user"] = user
             return jsonify(result)
 
         unique_id = Login.get_fast_id(content["username"])
@@ -87,7 +87,6 @@ def sign_up_handler():
                                                       content["phone_num"], content["personality_key_words"], "", "",
                                                       content["company_name"], content["activity"])
                 appUsers_db.insert_user(db, new_app_user)
-
 
         return jsonify(result)
 
@@ -173,11 +172,10 @@ def two_step_handler():
         # getting the Login objects
         user = dic["user"]
         result = user.two_step(content['code'])
-        print(result['result'])
-        return result['result']
+        return result['response']
     else:
         letter = {
-            "response": mutual.unknownError
+            "response": mutual.unknown_error
         }
         return jsonify(letter)
 
