@@ -7,7 +7,7 @@ from DataBase.instaUser import InstaUser
 # DataBase Constants
 table_name = 'Instagram_Users'
 col_id = 'id'
-col_app_user_id = 'app_user_id'
+# col_app_user_id = 'app_user_id'
 col_insta_id = 'instagram_id'
 col_unique_id = 'unique_id'
 col_isPrivate = 'is_private'
@@ -36,21 +36,20 @@ def __create_table_users(db):
     stmt = (
         "CREATE TABLE IF NOT EXISTS {0} ("
         "       {1} INT AUTO_INCREMENT NOT NULL PRIMARY KEY, "
-        "       {2} INT NOT NULL DEFAULT '-1', "
-        "       {3} VARCHAR(32) NOT NULL DEFAULT 'N/A', "
-        "       {4} VARCHAR(10) NOT NULL DEFAULT '0000000000',"  # main unique id
-        "       {5} BOOL DEFAULT '0', "
+        "       {2} VARCHAR(32) NOT NULL DEFAULT 'N/A', "
+        "       {3} VARCHAR(10) NOT NULL DEFAULT '0000000000',"  # main unique id
+        "       {4} BOOL DEFAULT '0', "
+        "       {5} INT NOT NULL DEFAULT '-1', "
         "       {6} INT NOT NULL DEFAULT '-1', "
         "       {7} INT NOT NULL DEFAULT '-1', "
-        "       {8} INT NOT NULL DEFAULT '-1', "
+        "       {8} VARCHAR(64) DEFAULT 'N/A', "
         "       {9} VARCHAR(64) DEFAULT 'N/A', "
-        "       {10} VARCHAR(64) DEFAULT 'N/A', "
+        "       {10} VARCHAR(255) DEFAULT 'N/A', "
         "       {11} VARCHAR(255) DEFAULT 'N/A', "
         "       {12} VARCHAR(255) DEFAULT 'N/A', "
-        "       {13} VARCHAR(255) DEFAULT 'N/A', "
-        "       {14} VARCHAR(255) DEFAULT 'N/A'"
+        "       {13} VARCHAR(255) DEFAULT 'N/A'"
         ")"
-    ).format(table_name, col_id, col_app_user_id, col_insta_id, col_unique_id, col_isPrivate, col_posts_count,
+    ).format(table_name, col_id, col_insta_id, col_unique_id, col_isPrivate, col_posts_count,
              col_followers_count,
              col_followings_count, col_followers_table, col_followings_table, col_pageType, col_prof_img_url, col_bio,
              col_name)
@@ -67,13 +66,13 @@ def insert_user(db, user: InstaUser):
     if not __create_table_users(db):
         return False
     args = (
-        user.appUserId, user.instaId, user.uniqueId, user.isPrivate, user.postsCount, user.folrs_count,
+        user.instaId, user.isPrivate, user.uniqueId, user.postsCount, user.folrs_count,
         user.folng_count,
         user.pageType, user.img_url, user.bio, user.fullName
     )
     stmt = "INSERT INTO {0} " \
-           "({1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11})" \
-           " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)".format(table_name, col_app_user_id, col_insta_id, col_isPrivate,
+           "({1},{2},{3},{4},{5},{6},{7},{8},{9},{10})" \
+           " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)".format(table_name, col_insta_id, col_isPrivate,
                                                             col_unique_id, col_posts_count,
                                                             col_followers_count, col_followings_count, col_pageType,
                                                             col_prof_img_url, col_bio, col_name)
@@ -92,8 +91,8 @@ def update_user(db, user: InstaUser):
         return False
     stmt = "UPDATE {0} SET {1} = %s,{2} = %s,{3} = %s,{4} = %s,{5} = %s,{6} = %s,{7} = %s, {8} = %s, {9} = %s" \
            " WHERE {10} = {11}".format(table_name, col_isPrivate, col_posts_count, col_followers_count,
-                                      col_followings_count, col_pageType, col_insta_id, col_prof_img_url,
-                                      col_bio,col_name, col_id, user.userId)
+                                       col_followings_count, col_pageType, col_insta_id, col_prof_img_url,
+                                       col_bio, col_name, col_id, user.userId)
     args = (
         user.isPrivate, user.postsCount, user.folrs_count, user.folng_count, user.pageType, user.instaId, user.img_url,
         user.bio, user.fullName
@@ -138,7 +137,7 @@ def get_user(db, _id, select_arg=col_id):
         cursor.execute(stmt)
         res = cursor.fetchone()
 
-        user = InstaUser(res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9], res[10], res[11])
+        user = InstaUser(res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9], res[10])
         user.userId = res[0]
         return user
     except Error:
