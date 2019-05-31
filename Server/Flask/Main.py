@@ -104,7 +104,7 @@ def first_page_info():
     letter["previous_post_num"] = in_user.postsCount
     letter["previous_follower_num"] = in_user.folrs_count
     letter["previous_following_num"] = in_user.folng_count
-
+    print()
     # new Informations
     new_inf = Login.get_public_informations(content["username"])
     letter["post_num"] = new_inf["post_num"]
