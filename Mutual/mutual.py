@@ -19,6 +19,9 @@ usual_user = "005"
 # user already exists error
 existing_user = "006"
 
+# selenium error
+selenium_error = "007"
+
 # successful process
 success_process = "111"
 

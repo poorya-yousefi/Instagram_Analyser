@@ -33,6 +33,9 @@ dic = {
 
 @app.route("/sign_up", methods=["POST", "GET"])
 def sign_up_handler():
+    result = {
+        "response": ""
+    }
     if not request.is_json:
         letter["response"] = mutual.unknown_error
         return jsonify(letter)
@@ -40,33 +43,89 @@ def sign_up_handler():
         # getting the json file from client
         content = request.get_json()
 
-        # trying to login to the page to see can we login or not
-        user = Login.Login(content["username"], content["password"])
-
-        # check that can we log as a username or not
-        result = user.login()
-
-        if result["response"] is mutual.incorrect_pass:
-            return jsonify(result)
-        elif result["response"] is mutual.two_step_en:
-            dic["user"] = user
-            return jsonify(result)
-
+        # getting the unique id for searching the database
         unique_id = Login.get_fast_id(content["username"])
 
+        print("There was a request for username " + content["username"] + " with unique id " + unique_id + " . ")
+
+        # checking for existing user
         if instaUsers_db.get_user(db, unique_id, instaUsers_db.col_unique_id) is not None:
             if appUsers_db.get_user(db, unique_id) is not None:
                 result["response"] = mutual.existing_user
+                print(
+                    "There was an existing user for instaUser and AppUser with unique id " + unique_id +
+                    " and username " + instaUsers_db.get_user(
+                        db, unique_id, instaUsers_db.col_unique_id).instaId)
                 return jsonify(result)
             # if we have an instaUser just make an app user
             else:
-                # user_information = Login.get_public_informations(content["username"])
+                print(
+                    "There was an existing user for instaUser  with unique id " + unique_id +
+                    " and username " + instaUsers_db.get_user(
+                        db, unique_id, instaUsers_db.col_unique_id).instaId)
+
                 new_app_user = appUser.CommercialUser(unique_id, datetime.datetime.now(), False, content["country"],
                                                       content["city"],
                                                       content["phone_num"], content["personality_key_words"], "", "",
                                                       content["company_name"], content["activity"])
                 appUsers_db.insert_user(db, new_app_user)
+
+                print("DataBase is created (just appUser) was created for the user with username "
+                      " " + content["username "] + " and unique id " + unique_id + " . ")
+
+                # trying to login to the page to see can we login or not
+                try:
+                    user = Login.Login(content["username"], content["password"])
+                except Exception:
+                    print("Some Error in selenium for signing up for user with uername " + content[
+                        "username"] + "and with unique id " + unique_id + ".")
+                    result["response"] = mutual.selenium_error
+                    return result
+
+
+                # check that can we log as a username or not
+                try:
+                    user = Login.Login(content["username"], content["password"])
+                except Exception:
+                    print("Some Error in selenium for signing up for user with uername " + content[
+                        "username"] + "and with unique id " + unique_id + ".")
+                    result["response"] = mutual.selenium_error
+                    return result
+
+                if result["response"] is mutual.incorrect_pass:
+                    print("There was an attempt for signing up for username " + content[
+                        "username"] + " with unique id : " + unique_id +
+                          " , but the password was incorrect .(existing instauser fpr this acount )")
+                    return jsonify(result)
+                elif result["response"] is mutual.two_step_en:
+                    print("There was an attempt for signing up for username " + content[
+                        "username"] + " with unique id : " + unique_id + " but it has two step verification code"
+                                                                         ". (existing instauser fpr this account )")
+                    dic["user"] = user
+                    return jsonify(result)
                 return jsonify(result)
+        # trying to login to the page to see can we login or not
+        user = Login.Login(content["username"], content["password"])
+
+        # check that can we log as a username or not
+        try:
+            user = Login.Login(content["username"], content["password"])
+        except Exception:
+            print("Some Error in selenium for signing up for user with uername " + content[
+                "username"] + "and with unique id " + unique_id + ".")
+            result["response"] = mutual.selenium_error
+            return result
+
+        if result["response"] is mutual.incorrect_pass:
+            print("There was an attempt for signing up for username " + content[
+                "username"] + " with unique id : " + unique_id +
+                  " , but the password was incorrect .")
+            return jsonify(result)
+        elif result["response"] is mutual.two_step_en:
+            print("There was an attempt for signing up for username " + content[
+                "username"] + " with unique id : " + unique_id + " , but it has two step verification code.")
+            dic["user"] = user
+            return jsonify(result)
 
         if result["response"] == mutual.success_login:
             print("A success sign up for " + content["username"] + ". ")
@@ -87,6 +146,9 @@ def sign_up_handler():
                                                       content["phone_num"], content["personality_key_words"], "", "",
                                                       content["company_name"], content["activity"])
                 appUsers_db.insert_user(db, new_app_user)
+
+                print("Data base was just created (both appUser and instaUser) for the user with username " + content[
+                    "username"] + " with uniqueID " + unique_id)
 
         return jsonify(result)
 
