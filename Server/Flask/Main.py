@@ -76,16 +76,17 @@ def sign_up_handler():
                 # trying to login to the page to see can we login or not
                 try:
                     user = Login.Login(content["username"], content["password"])
+                    result = user.login()
                 except Exception:
                     print("Some Error in selenium for signing up for user with uername " + content[
                         "username"] + "and with unique id " + unique_id + ".")
                     result["response"] = mutual.selenium_error
                     return result
 
-
                 # check that can we log as a username or not
                 try:
                     user = Login.Login(content["username"], content["password"])
+                    result = user.login()
                 except Exception:
                     print("Some Error in selenium for signing up for user with uername " + content[
                         "username"] + "and with unique id " + unique_id + ".")
@@ -105,11 +106,10 @@ def sign_up_handler():
                     return jsonify(result)
                 return jsonify(result)
         # trying to login to the page to see can we login or not
-        user = Login.Login(content["username"], content["password"])
-
         # check that can we log as a username or not
         try:
             user = Login.Login(content["username"], content["password"])
+            result = user.login()
         except Exception:
             print("Some Error in selenium for signing up for user with uername " + content[
                 "username"] + "and with unique id " + unique_id + ".")
@@ -199,29 +199,55 @@ def first_page_info():
 # listening on port = "127.0.0.1" on port 50000 for login
 @app.route('/login', methods=['POST', 'GET'])
 def login_handler():
+    result = {
+        "response": ""
+    }
+
     if request.is_json:
-        print("Login Json received successfully ... ")
+
         content = request.get_json()
-        print("Login Json contents: ", content)
+        # Getting the fast id (unique id) to search with data base.
+        unique_id = Login.get_fast_id(content["username"])
 
-        # Check the database for username and password
-        app = appUser.AppUser(datetime.datetime.now(), )
+        print("A login request received from user with username : " + content[
+            "username"] + " and uniqueID : " + unique_id + " . ")
 
-        # log in to the page with selenium
-        user = Login.Login(content["username"], content["password"])
-        result = user.login()
-        dic["user"] = user
+        # search for the login requested user to see there is an existing account or not
+        user = appUsers_db.get_user(db, unique_id)
 
-        if result["result"] == "two step is enable":
-            return result["result"]
-        else:
-            return result["result"]
+        # if there is no existing account for user , return the related error
+        if user is None:
+            print("There were no sign up for the user with username : " + content[
+                "username"] + " and uniqueID : " + unique_id + " . ")
+            result["response"] = mutual.no_sign_up
+            return jsonify(result)
+
+        try:
+            # log in to the page with selenium
+            user = Login.Login(content["username"], content["password"])
+            result = user.login()
+            dic["user"] = user
+        except Exception:
+            print("Some Error in selenium for signing up for user with uername " + content[
+                "username"] + "and with unique id " + unique_id + ".")
+            result["response"] = mutual.selenium_error
+            return result
+
+        # checking the error of information that user entered
+        if result["response"] is mutual.two_step_en:
+            print("Trying to login for the user with username : " + content[
+                "username"] + " and uniqueID : " + unique_id + " . ")
+            return jsonify(result)
+        elif result["response"] is mutual.incorrect_pass:
+            return jsonify(result)
+
+
 
     else:
-        letter = {
+        result = {
             "response": mutual.unknown_error
         }
-        return jsonify(letter)
+        return jsonify(result)
 
 
 # listening on port = "127.0.0.1" on port 50000 for two Step verification code

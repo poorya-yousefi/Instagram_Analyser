@@ -99,6 +99,10 @@ def save_cookies(username, cookies):
         file.close()
 
 
+
+
+
+
 # A function to get unique id information fast to sign up
 def get_fast_id(username):
     info = get_req_url(username)

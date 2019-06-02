@@ -22,6 +22,9 @@ existing_user = "006"
 # selenium error
 selenium_error = "007"
 
+# no app user sign up
+no_sign_up = "008"
+
 # successful process
 success_process = "111"
 
