@@ -197,7 +197,7 @@ def first_page_info():
 
 
 # listening on port = "127.0.0.1" on port 50000 for login
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['GET', 'POST'])
 def login_handler():
     result = {
         "response": ""
@@ -236,13 +236,21 @@ def login_handler():
         # checking the error of information that user entered
         if result["response"] is mutual.two_step_en:
             print("Trying to login for the user with username : " + content[
-                "username"] + " and uniqueID : " + unique_id + " . ")
+                "username"] + " and uniqueID : " + unique_id + " . but two step verification code was enable .")
             return jsonify(result)
         elif result["response"] is mutual.incorrect_pass:
+            print("Trying to login for the user with username : " + content[
+                "username"] + " and uniqueID : " + unique_id + " . but password was incorrect .")
             return jsonify(result)
 
-
-
+        # checking for changing user name
+        insta_user = instaUsers_db.get_user(db, unique_id, instaUsers_db.col_unique_id)
+        if insta_user.instaId is not content["username"]:
+            print("Insta user with previous username : " + insta_user.userId + " was updated to username : " + content[
+                "username"] + " with uniqueID " + unique_id + " .")
+            insta_user.instaId = content["username"]
+            instaUsers_db.update_user(db, insta_user)
+        return jsonify(result)
     else:
         result = {
             "response": mutual.unknown_error
