@@ -25,6 +25,9 @@ selenium_error = "007"
 # no app user sign up
 no_sign_up = "008"
 
+# not finding driver for two step verification
+no_driver_two_step = "009"
+
 # successful process
 success_process = "111"
 
