@@ -225,7 +225,7 @@ def login_handler():
             result = user.login()
             dic[str(unique_id)] = user
         except Exception:
-            print("Some Error in selenium for signing up for user with uername " + content[
+            print("Some Error in selenium for signing up for user with username " + content[
                 "username"] + "and with unique id " + unique_id + ".")
             result["response"] = mutual.selenium_error
             return result
@@ -242,9 +242,11 @@ def login_handler():
 
         # checking for changing user name
         insta_user = instaUsers_db.get_user(db, unique_id, instaUsers_db.col_unique_id)
-        if insta_user.instaId is not content["username"]:
+
+        if insta_user.instaId != content["username"]:
+
             print("Insta user with previous username : " + insta_user.userId + " was updated to username : " + content[
-                "username"] + " with uniqueID " + unique_id + " .")
+                "username"] + " with uniqueID " + str(unique_id) + " .")
             insta_user.instaId = content["username"]
             instaUsers_db.update_user(db, insta_user)
         return jsonify(result)

@@ -68,7 +68,7 @@ class Login:
         # saving the cookies for this user
         save_cookies(self.userName, self.driver.get_cookies())
         self.letter["response"] = mutual.success_login
-        self.driver.close()
+        # self.driver.close()
         return self.letter
 
     # two step verification code for login to instagram
